@@ -35,9 +35,9 @@ const CreatePerson = ({ Mode }) => {
   const [options, setOptions] = useState([]);
   const [PageTitle, setPageTitle] = useState("Add New Person");
   const [mode, setMode] = useState(""); 
-  const redirect = useNavigate();
   const { PersonID } = useParams();
   const [PersonData, setPersonData] = useState({ person });
+  const redirect = useNavigate();
 
   useEffect(() => {
     setMode(Mode);

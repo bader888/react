@@ -1,0 +1,8 @@
+.Header {
+    background-color: #eee;
+    width: 100vw;
+    max-width: 100%;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+}

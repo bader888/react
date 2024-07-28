@@ -20,11 +20,11 @@ const PresonDetails = () => {
   const { PersonID } = useParams();
   const [open, setOpen] = useState(false);
   const refPrsonCard = useRef();
+  const redirect = useNavigate();
   useEffect(() => {
     refPrsonCard.current.FoundPerson(PersonID);
   }, []);
 
-  const redirect = useNavigate();
 
   const handleBackClick = () => {
     redirect("/People");

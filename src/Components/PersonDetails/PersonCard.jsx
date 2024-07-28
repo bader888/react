@@ -1,8 +1,7 @@
 import React, {
   forwardRef,
   useState,
-  useImperativeHandle,
-  useEffect,
+  useImperativeHandle, 
 } from "react";
 import "./PersonDetails.css";
 import { Container } from "@mui/material";
@@ -20,6 +19,7 @@ import Swal from "sweetalert2";
 
 const PersonCard = forwardRef((PersonID, ref) => {
   const [Person, setPerson] = useState(person); 
+  
   useImperativeHandle(ref, () => ({
     async FoundPerson(id) {
       resetDefultValue();
@@ -66,8 +66,7 @@ const PersonCard = forwardRef((PersonID, ref) => {
     <div>
       <Container maxWidth="md">
         <div class="UserDetails">
-          <Header title={"Person Details"} />
-
+          <Header title={"Person Details"} /> 
           <div>
             <span>
               <NumbersIcon />

@@ -2,12 +2,12 @@ import React from "react";
 import DeleteICon from "@mui/icons-material/Delete";
 import BackIcon from "@mui/icons-material/ArrowBackIosNewSharp";
 import EditIcon from "@mui/icons-material/Edit";
-import { Button } from "@mui/material";
+import { Button } from "@mui/material"; 
 
 import "./Action.css"
 
 const Actions = ({BackAction,DeleteAction,UpdateAction}) => {
-
+ 
     function handleOnClickback()
     {
         BackAction();

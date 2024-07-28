@@ -1,0 +1,28 @@
+.UserCard {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(auto, 1fr);
+  border: 0.08px solid #EEE;
+  border-radius: 3px;
+  box-shadow: 0px 0px 0px 0px  0.8px;
+  max-width: 100%; 
+  gap: 10px;
+  padding: 10px;
+}
+
+.UserCard div {
+    background-color: #eeeeee5c;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    text-transform: capitalize;
+    border-radius: 1px;
+    box-shadow: 0px 0px 0px 0.08px; 
+    gap: 5px;
+    padding: 5px;
+}
+
+.UserCard .CardHeader {
+  grid-column: 1/-1;
+  text-align: center;
+}

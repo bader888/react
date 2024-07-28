@@ -1,10 +1,11 @@
-
-.btn-Wrapper { 
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    justify-content: center;
-    padding-top: 5px;
-    padding-left: 24px; 
-  }
-  
+.btn-Wrapper {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center; 
+  max-width: 100%; 
+  padding: 20px; 
+  box-shadow: 0px 0px 0px 0.1px;
+  border-radius: 1px;
+  margin: 10px 0;
+}

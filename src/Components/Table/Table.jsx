@@ -7,10 +7,10 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import React from "react";
 
-const MyTable = ({tableData,handleRowClick}) => { 
-  console.log(tableData)
+const MyTable = ({ tableData, handleRowClick }) => {
+  console.log(tableData);
   let th = new Array();
-  let tr = new Array(); 
+  let tr = new Array();
   for (let i = 0; i < tableData.length; i++) {
     let arr = new Array();
     for (let key in tableData[i]) {
@@ -21,11 +21,11 @@ const MyTable = ({tableData,handleRowClick}) => {
 
   for (let key in tableData[0]) {
     th.push(key);
-  } 
+  }
   return (
     <div>
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }}  aria-label="simple table">
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead sx={{ background: "#96C9F4" }}>
             <TableRow>
               {th.map((headname, index) => (
@@ -35,32 +35,36 @@ const MyTable = ({tableData,handleRowClick}) => {
               ))}
             </TableRow>
           </TableHead>
-       
+
           <TableBody>
-          {tr.map((row, rowindex) => (
-            <TableRow
-              key={rowindex}
-              onClick={() => handleRowClick(row[0])}
-              hover
-              sx={
-                rowindex % 2 == 0
-                  ? { background: "#fff" }
-                  : { background: "#eee" }
-              }
-            >
-              {row.map((cell, cellindex) => (
-                <TableCell key={cellindex} align="center">
-                  {cell}
-                </TableCell>
-              ))}
-            </TableRow>
-          ))}
+            {tr.map((row, rowindex) => (
+              <TableRow
+                key={rowindex}
+                onClick={() => handleRowClick(row[0])}
+                hover
+                sx={
+                  rowindex % 2 == 0
+                    ? { background: "#fff" }
+                    : { background: "#eee" }
+                }
+              >
+                {row.map((cell, cellindex) => (
+                  <TableCell key={cellindex} align="center">
+                    {typeof cell == "boolean"
+                      ? cell == true
+                        ? "yes"
+                        : "no"
+                      : cell}
+                  </TableCell>
+                ))}
+              </TableRow>
+            ))}
           </TableBody>
-        </Table> 
+        </Table>
       </TableContainer>
       <div className="countContainer">
-            <span>count: {tableData.length} </span>
-        </div>
+        <span>count: {tableData.length} </span>
+      </div>
     </div>
   );
 };
