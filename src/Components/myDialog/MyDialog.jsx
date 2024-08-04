@@ -22,7 +22,7 @@ const MyDialog = ({ title, message, Open, handleConfirm,handleClose }) => {
           <DialogContentText>{message}</DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleOnConfirm} color="primary">
+          <Button onClick={handleOnConfirm} color="error">
             Confirm
           </Button>
           <Button onClick={handleOnClose} color="info" autoFocus>

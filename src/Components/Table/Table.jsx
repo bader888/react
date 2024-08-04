@@ -8,11 +8,10 @@ import Paper from "@mui/material/Paper";
 import React from "react";
 
 const MyTable = ({ tableData, handleRowClick }) => {
-  console.log(tableData);
-  let th = new Array();
-  let tr = new Array();
+  let th = [];
+  let tr = [];
   for (let i = 0; i < tableData.length; i++) {
-    let arr = new Array();
+    let arr = [];
     for (let key in tableData[i]) {
       arr.push(tableData[i][key]);
     }
@@ -43,7 +42,7 @@ const MyTable = ({ tableData, handleRowClick }) => {
                 onClick={() => handleRowClick(row[0])}
                 hover
                 sx={
-                  rowindex % 2 == 0
+                  rowindex % 2 === 0
                     ? { background: "#fff" }
                     : { background: "#eee" }
                 }
@@ -51,7 +50,7 @@ const MyTable = ({ tableData, handleRowClick }) => {
                 {row.map((cell, cellindex) => (
                   <TableCell key={cellindex} align="center">
                     {typeof cell == "boolean"
-                      ? cell == true
+                      ? cell === true
                         ? "yes"
                         : "no"
                       : cell}

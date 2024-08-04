@@ -6,7 +6,7 @@ export class clsCountry {
   static async GetAllCountry() {
     try {
       const response = await axios.get(
-        "https://localhost:7122/Country/GetAllCountries"
+        "https://localhost:7180/Country/GetAllCountries"
       ); 
       return response.data.Data;
     } catch (error) {

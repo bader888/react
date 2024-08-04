@@ -7,16 +7,18 @@ import Add from "@mui/icons-material/Add";
 import { clsPerson } from "../../Module/clsPerson";
 import MyTable from "../../Components/Table/Table";
 import Header from "../../Components/header/Header";
+import { currentUser } from "../../Global/CurrentUser";
 
 export default function ListPeople() {
-  const [people, setPeople] = useState([]); 
+  const [people, setPeople] = useState([]);
   const redirect = useNavigate();
-  
+
   useEffect(() => {
-    clsPerson.GetAllPeople().then((people) => { 
+    console.log(currentUser);
+    clsPerson.GetAllPeople().then((people) => {
       setPeople(people);
     });
-  }, [ ]);
+  }, []);
 
   const handleAddNew = () => {
     redirect("Create");
@@ -28,13 +30,10 @@ export default function ListPeople() {
 
   return (
     <div>
-      
-      <Container maxWidth="lg" className="Container"  maxWidth={"md"}>
-      
+      <Container maxWidth="lg" className="Container">
         <div>
-       
-         <Header title={"Manage People"}/>
-       
+          <Header title={"Manage People"} />
+
           <Button
             color="success"
             style={{ marginBottom: "10px" }}
@@ -44,13 +43,10 @@ export default function ListPeople() {
           >
             Add Person
           </Button>
-       
         </div>
-       
-        <MyTable tableData={people} handleRowClick={handleRowClick}/> 
-      
+
+        <MyTable tableData={people} handleRowClick={handleRowClick} />
       </Container>
-   
     </div>
   );
 }

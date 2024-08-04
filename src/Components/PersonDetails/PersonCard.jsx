@@ -27,11 +27,6 @@ const PersonCard = forwardRef((PersonID, ref) => {
         const resp = await clsPerson.findPerson(id);
         if (resp !== null) {
           setPerson(resp.PersonInfo);
-          Swal.fire({
-            title: "Message",
-            text: resp.Message,
-            icon: resp.Status == true ? "success" : "error",
-          });
         } else {
           Swal.fire({
             title: "Oppps!",

@@ -1,28 +1,36 @@
 
-import { Password } from "@mui/icons-material";
+
 import axios from "axios";
 export class clsUser {
-    constructor() {
+
+  static async Login(UserData) {
+    try {
+      const response = await axios.post(
+        "https://localhost:7180/User/Login",
+        UserData
+      );
+      return response.data;
+    } catch (error) {
+      console.error("Error creating User:", error); 
     }
-  
+  }
     // Method to create a new User
     static async createUser(UserData) {
       try {
         const response = await axios.post(
-          "https://localhost:7122/User/AddNewUser",
+          "https://localhost:7180/User/CreateUser",
           UserData
         );
         return response.data;
       } catch (error) {
-        console.error("Error creating User:", error);
-        throw error;
+        console.error("Error login User:", error); 
       }
     }
   
     static async Update(UserData, UserID) {
       try {
         const response = await axios.put(
-          `https://localhost:7122/User/UpdateUser/${UserID}`,
+          `https://localhost:7180/User/UpdateUser/${UserID}`,
           UserData
         );
         return response.data;
@@ -36,7 +44,7 @@ export class clsUser {
     static async Delete(UserID) {
       try {
         const response = await axios.delete(
-          `https://localhost:7122/User/Delete/${UserID}`
+          `https://localhost:7180/User/Delete/${UserID}`
         );
         return response.data;
       } catch (error) {
@@ -49,7 +57,7 @@ export class clsUser {
     static async findUser(UserId) {
       try {
         const response = await axios.get(
-          `https://localhost:7122/User/GetUser/${UserId}`
+          `https://localhost:7180/User/GetUser/${UserId}`
         );
         return response.data.Data;
       } catch (error) {
@@ -61,7 +69,7 @@ export class clsUser {
     static async GetAllUsers() {
       try {
         const response = await axios.get(
-          "https://localhost:7122/User/ListUsers"
+          "https://localhost:7180/User/ListUsers"
         );
         return response.data.Data;
       } catch (error) {
@@ -69,6 +77,19 @@ export class clsUser {
         throw error;
       }
     }
+
+    static async ChangePassword(UserData) {
+      try {
+        const response = await axios.post(
+          "https://localhost:7180/User/changePassword",
+          UserData
+        );
+        return response.data;
+      } catch (error) {
+        console.error("Error login User:", error); 
+      }
+    }
+ 
   }
   
 
@@ -81,3 +102,9 @@ export class clsUser {
     Permisstion:""
   };
   
+  export const CreateUserData = { 
+    PersonID: "",
+    Password: "", 
+    UserName: "", 
+    Permisstions:""
+  };

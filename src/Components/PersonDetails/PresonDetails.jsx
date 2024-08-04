@@ -1,26 +1,22 @@
 import React from "react";
-import "./PersonDetails.css";
-import { Button, Container } from "@mui/material";
+import "./PersonDetails.css"; 
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import DeleteICon from "@mui/icons-material/Delete";
-import BackIcon from "@mui/icons-material/ArrowBackIosNewSharp";
-import EditIcon from "@mui/icons-material/Edit";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";  
 import Swal from "sweetalert2";
 import PersonCard from "./PersonCard";
 import { useRef } from "react";
 import MyDialog from "../myDialog/MyDialog";
 import Actions from "../mainAction/Actions";
 import { clsPerson } from "../../Module/clsPerson";
+import { Container } from "@mui/material";
 
-const PresonDetails = () => {
-  const [Person, setPerson] = useState({});
+const PresonDetails = () => { 
   const { PersonID } = useParams();
   const [open, setOpen] = useState(false);
   const refPrsonCard = useRef();
   const redirect = useNavigate();
+  
   useEffect(() => {
     refPrsonCard.current.FoundPerson(PersonID);
   }, []);
@@ -44,13 +40,13 @@ const PresonDetails = () => {
     try {
       const resp = await clsPerson.Delete(PersonID); 
       Swal.fire({
-        title: resp.Success == true ? "success" : "Faild",
+        title: resp.Success === true ? "success" : "Faild",
         text: resp.Message,
-        icon: resp.Success == true ? "success" : "error",
+        icon: resp.Success === true ? "success" : "error",
         confirmButtonText: "Ok",
       });
 
-      if (resp.Success == true) redirect("/People");
+      if (resp.Success === true) redirect("/People");
     } catch (AxiosError) {
       console.log(AxiosError);
     }

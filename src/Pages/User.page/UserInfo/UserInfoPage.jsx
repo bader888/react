@@ -1,15 +1,17 @@
 import { Container } from "@mui/material";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import UserCard from "../../../Components/Users/UserCard/UserCard";
 import Actions from "../../../Components/mainAction/Actions";
 import { useNavigate, useParams } from "react-router-dom";
 import { clsUser } from "../../../Module/clsUsers";
 import Swal from "sweetalert2";
+import MyDialog from "../../../Components/myDialog/MyDialog";
 
 const UserInfoPage = () => {
   const { UserID } = useParams();
   const refUserCard = useRef();
   const redirect = useNavigate();
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     refUserCard.current.FoundUser(UserID);
@@ -19,12 +21,24 @@ const UserInfoPage = () => {
     redirect("/Users");
   }
 
-  function HandleUpdateAction() {}
-
   async function HandleDeleteAction() {
+    setOpen(true);
+
+  }
+
+  async function handleCloseDialoge() {
+    setOpen(false);
+
+  }
+  const HandleUpdateAction = () => { 
+    redirect(`/UpdateUser/${UserID}`)
+  };
+
+  const handleConfirmDelete = async () => {
+    setOpen(false);
+
     try {
-      const response = await clsUser.Delete(UserID);
-      console.log(response);
+      const response = await clsUser.Delete(UserID); 
       Swal.fire({
         title:response.Success === true? "Success": "Oppps!",
         text: response.Message ,
@@ -37,7 +51,7 @@ const UserInfoPage = () => {
     } catch (error) {
       console.error(error);
     } 
-  }
+  };
 
   return (
     <div>
@@ -49,6 +63,16 @@ const UserInfoPage = () => {
           DeleteAction={HandleDeleteAction}
         />
       </Container>
+
+      
+      <MyDialog
+          Open={open}
+          handleConfirm={handleConfirmDelete}
+          handleClose={handleCloseDialoge}
+          message={`if you click Confirm button you can't undo the change, and the
+            User with ID =  "${UserID}" will remove from the database`}
+          title={`Are You Sure you want to delete User with id = "${UserID}"`}
+        />
     </div>
   );
 };

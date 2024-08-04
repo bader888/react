@@ -1,13 +1,12 @@
 import axios from "axios";
 
-export class clsPerson {
-  constructor() {}
+export class clsPerson { 
 
   // Method to create a new person
   static async createPerson(personData) {
     try {
       const response = await axios.post(
-        "https://localhost:7122/Person/AddNewPerson",
+        "https://localhost:7180/Person/AddNewPerson",
         personData
       );
       return response.data;
@@ -20,7 +19,7 @@ export class clsPerson {
   static async Update(personData, PersonID) {
     try {
       const response = await axios.put(
-        `https://localhost:7122/Person/UpdatePerson/${PersonID}`,
+        `https://localhost:7180/Person/UpdatePerson/${PersonID}`,
         personData
       );
       return response.data;
@@ -34,7 +33,7 @@ export class clsPerson {
   static async Delete(PersonID) {
     try {
       const response = await axios.delete(
-        `https://localhost:7122/Person/DeletePerson/${PersonID}`
+        `https://localhost:7180/Person/DeletePerson/${PersonID}`
       );
       return response.data;
     } catch (error) {
@@ -47,7 +46,7 @@ export class clsPerson {
   static async findPerson(personId) {
     try {
       const response = await axios.get(
-        `https://localhost:7122/Person/FindPerson/${personId}`
+        `https://localhost:7180/Person/FindPerson/${personId}`
       );
       return response.data.Data;
     } catch (error) {
@@ -59,7 +58,7 @@ export class clsPerson {
   static async GetAllPeople() {
     try {
       const response = await axios.get(
-        "https://localhost:7122/Person/AllPeople"
+        "https://localhost:7180/Person/AllPeople"
       );
       return response.data.Data;
     } catch (error) {

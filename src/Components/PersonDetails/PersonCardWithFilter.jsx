@@ -4,16 +4,16 @@ import PersonCard from "./PersonCard";
 import { Container } from "@mui/material";
 import { useRef } from "react";
 
-const PersonDetailsWithFilter = () => {
+const PersonDetailsWithFilter = ({ handleWhenPersonFound }) => {
   const [personID, setPersonID] = useState(-1);
   const refPrsonCard = useRef();
 
   const HandleSearchClick = (PersonID) => {
-    console.log("Person id from the person card comp"+ PersonID);  
+    console.log("Person id from the person card comp" + PersonID);
     refPrsonCard.current.FoundPerson(PersonID);
-    setPersonID(PersonID); 
-  }; 
- 
+    setPersonID(PersonID);
+    handleWhenPersonFound(PersonID);
+  };
   return (
     <div>
       <Container maxWidth={"md"}>
@@ -22,7 +22,7 @@ const PersonDetailsWithFilter = () => {
           searchLable={"Enter PersonID"}
         />
 
-        <PersonCard Person={personID} ref={refPrsonCard}  />
+        <PersonCard Person={personID} ref={refPrsonCard} />
       </Container>
     </div>
   );

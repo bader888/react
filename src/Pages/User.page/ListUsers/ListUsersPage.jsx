@@ -18,7 +18,7 @@ const ListUsersPage = () => {
 
   const handleAddNew = () => {
     console.log("add new user");
-    //redirect("Create");
+    redirect("/Users/Create");
   };
 
   const handleRowClick = (userid) => { 

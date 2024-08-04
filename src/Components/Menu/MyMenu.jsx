@@ -6,7 +6,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from '@mui/material/ListItemText';
 import { Logout, Password, Person } from "@mui/icons-material";
 
-export default function MyMenu() {
+export default function MyMenu({HandleLogOut,HandleCurrentUser,HandleChangePassword}) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -17,6 +17,21 @@ export default function MyMenu() {
     setAnchorEl(null);
   };
 
+  const handleLogOut = () => {
+    HandleLogOut();
+    handleClose();
+  };
+
+  const handleCurrentUser = () => {
+    HandleCurrentUser();
+    handleClose();
+  };
+  
+  
+  const handleChangePassword = () => {
+    HandleChangePassword();
+    handleClose();
+  };
   return (
     <div>
       <Button
@@ -37,19 +52,19 @@ export default function MyMenu() {
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={handleCurrentUser}>
           <ListItemIcon>
             <Person />
           </ListItemIcon>
-          <ListItemText>User information</ListItemText>
+          <ListItemText>Current User</ListItemText>
         </MenuItem>
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={handleChangePassword}>
           <ListItemIcon>
             <Password />
           </ListItemIcon>
           <ListItemText>Change password</ListItemText>
         </MenuItem>
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={handleLogOut}>
           <ListItemIcon>
             <Logout />
           </ListItemIcon>

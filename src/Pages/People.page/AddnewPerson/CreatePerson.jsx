@@ -28,41 +28,41 @@ import Swal from "sweetalert2";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { DateToString } from "../../../Formate/DataFormate";
-import { clsCountry } from "../../../Module/clsCountry"; 
-import {clsPerson,person} from "../../../Module/clsPerson" 
+import { clsCountry } from "../../../Module/clsCountry";
+import { clsPerson, person } from "../../../Module/clsPerson";
 
 const CreatePerson = ({ Mode }) => {
   const [options, setOptions] = useState([]);
   const [PageTitle, setPageTitle] = useState("Add New Person");
-  const [mode, setMode] = useState(""); 
+  const [mode, setMode] = useState("");
   const { PersonID } = useParams();
   const [PersonData, setPersonData] = useState({ person });
   const redirect = useNavigate();
 
   useEffect(() => {
     setMode(Mode);
-    console.log(mode);
 
     clsCountry.GetAllCountry().then((Countries) => {
       setOptions(Countries);
     });
 
     //if update mode get the person data
-    if (mode == "Update") {
+    if (mode === "Update") {
       setPageTitle("Update Person");
-      clsPerson.findPerson(PersonID).then((data) => {   
+      clsPerson.findPerson(PersonID).then((data) => {
         setPersonData(data.PersonInfo);
         setPersonData({
           ...data.PersonInfo,
-          ["FullName"]: data.PersonInfo.FirstName +
-          " " +
-          data.PersonInfo.SecondName +
-          " " +
-          data.PersonInfo.ThirdName
+          FullName:
+            data.PersonInfo.FirstName +
+            " " +
+            data.PersonInfo.SecondName +
+            " " +
+            data.PersonInfo.ThirdName,
         });
       });
     }
-  }, [mode, PersonID]);
+  }, [mode, PersonID, Mode]);
 
   const handleCountryChage = async (event, newValue) => {
     setPersonData((prevPersonData) => ({
@@ -73,7 +73,6 @@ const CreatePerson = ({ Mode }) => {
 
   const handleChange = async (event) => {
     const { name, value } = event.target;
-    console.log(name, value);
     setPersonData({ ...PersonData, [name]: value });
   };
 
@@ -82,15 +81,15 @@ const CreatePerson = ({ Mode }) => {
     const allnames = PersonData.FullName.split(" ");
     setPersonData({
       ...PersonData,
-      ["FirstName"]: allnames[0],
-      ["SecondName"]: allnames[1],
-      ["ThirdName"]: allnames[2],
-      ["LastName"]: " ",
+      FirstName: allnames[0],
+      SecondName: allnames[1],
+      ThirdName: allnames[2],
+      LastName: " ",
     });
     let response = null;
-    if (mode == "Create") {
+    if (mode === "Create") {
       response = await clsPerson.createPerson(PersonData);
-      if (response.Success == true) {
+      if (response.Success === true) {
         redirect(`/update/${response.Data.PersonID}`);
         setMode("Update");
       }
@@ -99,9 +98,9 @@ const CreatePerson = ({ Mode }) => {
     }
 
     Swal.fire({
-      title: response.Success == true ? "success" : "Faild",
+      title: response.Success === true ? "success" : "Faild",
       text: response.Message,
-      icon: response.Success == true ? "success" : "error",
+      icon: response.Success === true ? "success" : "error",
     });
   };
 
@@ -118,10 +117,7 @@ const CreatePerson = ({ Mode }) => {
       >
         <h1 style={{ textAlign: "center" }}>{PageTitle}</h1>
         {/* full name national no */}
-        <Box
-          component={"section"}
-          className="box" 
-        >
+        <Box component={"section"} className="box">
           <TextField
             required
             id="nationalNumber"
@@ -146,7 +142,7 @@ const CreatePerson = ({ Mode }) => {
             name="FullName"
             onChange={handleChange}
             label="Full Name"
-            style={{ flex: "3" }} 
+            style={{ flex: "3" }}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
@@ -160,10 +156,7 @@ const CreatePerson = ({ Mode }) => {
         <Divider style={{ margin: "10px 0" }} />
         {/* email phone number address */}
 
-        <Box
-          component={"section"}
-            className="box"
-        >
+        <Box component={"section"} className="box">
           <TextField
             required
             type="email"
@@ -219,10 +212,7 @@ const CreatePerson = ({ Mode }) => {
         <Divider style={{ margin: "10px 0" }} />
 
         {/* egender and country*/}
-        <Box
-          component={"section"}
-           className="box" 
-        >
+        <Box component={"section"} className="box">
           <FormControl>
             <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel>
             <RadioGroup
@@ -237,11 +227,11 @@ const CreatePerson = ({ Mode }) => {
                 control={<Radio />}
                 label="Female"
                 name="Gendor"
-                checked={PersonData.Gendor == "0"}
+                checked={PersonData.Gendor === "0"}
               />
               <FormControlLabel
                 value="1"
-                checked={PersonData.Gendor == "1"}
+                checked={PersonData.Gendor === "1"}
                 name="Gendor"
                 control={<Radio />}
                 label="Male"
@@ -274,10 +264,7 @@ const CreatePerson = ({ Mode }) => {
         {/* image*/}
 
         {/* images */}
-        <Box
-          component={"section"} 
-          className="box"  
-        >
+        <Box component={"section"} className="box">
           <TextField
             required
             id="Image"
@@ -296,17 +283,14 @@ const CreatePerson = ({ Mode }) => {
         </Box>
         <div>
           <img
-            src={PersonData.Gendor == "1" ? MaleImg : FemaleImg}
+            src={PersonData.Gendor === "1" ? MaleImg : FemaleImg}
             alt=""
             className="img"
           />
         </div>
         {/* buttons save back */}
         <Divider style={{ margin: "10px 0" }} />
-        <Box
-          component={"section"} 
-          className="box"  
-        >
+        <Box component={"section"} className="box">
           <Button
             variant="outlined"
             onClick={handleBack}
@@ -324,7 +308,6 @@ const CreatePerson = ({ Mode }) => {
           </Button>
         </Box>
       </Container>
-      
     </div>
   );
 };

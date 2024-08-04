@@ -11,23 +11,18 @@ import {
   QuestionMark,
 } from "@mui/icons-material";
 import { clsUser, UserData } from "../../../Module/clsUsers";
-import Swal from "sweetalert2";
+import Swal from "sweetalert2"; 
 
 const UserCard = forwardRef((UserID,ref) => {
-  const [user, setUser] = useState({ UserData });
+  const [user, setUser] = useState({ UserData }); 
 
   useImperativeHandle(ref, () => ({
     async FoundUser(id) {
       resetDefultValue();
       try {
         const resp = await clsUser.findUser(id); 
-        if (resp !== null) {
+        if (resp !== null) { 
           setUser(resp);
-          Swal.fire({
-            title: "Message",
-            text: "User Found Successfully",
-            icon: "success"
-          });
         } else {
           Swal.fire({
             title: "Oppps!",
@@ -87,9 +82,10 @@ const UserCard = forwardRef((UserID,ref) => {
           <i>
             <QuestionMark />
           </i>
-          <span id="lblisactive">{user.IsActive == true ? "Yes" : "No"}</span>
+          <span id="lblisactive">{user.IsActive === true ? "Yes" : "No"}</span>
         </div>
       </section>
+
     </div>
   );
 });
