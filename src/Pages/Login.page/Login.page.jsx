@@ -47,15 +47,12 @@ const LoginPage = () => {
     try {
       const response = await clsUser.Login(userData);
       console.log(response);
-
       if (response.Success) {
         setInvalidMessage(false);
         const user = await clsUser.findUser(response.Data.UserID);
-   
         // Update properties of currentUser
         Object.assign(currentUser, user);
-
-        redirect("/People");
+        redirect("/");
       } else {
         setInvalidMessage(true);
       }
@@ -65,7 +62,7 @@ const LoginPage = () => {
   };
   return (
     <div>
-      <section>
+      <section className="loginPageContainer">
         <div className="Conatiner ">
           <Header title={"wellcome to DVLD  System v1"} />
           <Box className="formContainer shadow">

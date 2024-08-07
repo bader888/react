@@ -5,8 +5,7 @@ import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import Button from "@mui/material/Button";
 import List from "@mui/material/List";
-import { Link } from "react-router-dom";
-import Divider from "@mui/material/Divider";
+import { Link } from "react-router-dom"; 
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -53,7 +52,7 @@ export default function Navbar() {
             <ListItemButton>
               <ListItemIcon>
                 <Link
-                  to={text.includes(" ") == true ? text.replace(" ", "") : text}
+                  to={text.includes(" ") === true ? text.replace(" ", "") : text}
                 >
                   {index === 0 ? (
                     <HomeIcon />

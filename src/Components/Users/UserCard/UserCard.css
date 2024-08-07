@@ -1,25 +1,20 @@
-.UserCard {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(auto, 1fr);
-  border: 0.08px solid #EEE;
-  border-radius: 3px;
-  box-shadow: 0px 0px 0px 0px  0.8px;
+.UserCard {  
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px; 
+  border-radius: 3px; 
   max-width: 100%; 
-  gap: 10px;
-  padding: 10px;
 }
 
-.UserCard div {
-    background-color: #eeeeee5c;
+.UserCard div { 
     display: flex;
     justify-content: start;
     align-items: center;
     text-transform: capitalize;
-    border-radius: 1px;
-    box-shadow: 0px 0px 0px 0.08px; 
-    gap: 5px;
-    padding: 5px;
+    border-radius: 1px; 
+    gap: 10px;
+    padding: 5px 30px; 
 }
 
 .UserCard .CardHeader {

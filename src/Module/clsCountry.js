@@ -1,8 +1,7 @@
 import axios from "axios";
 
 export class clsCountry {
-  constructor() {}
-
+  
   static async GetAllCountry() {
     try {
       const response = await axios.get(

@@ -1,0 +1,19 @@
+.apllicationTypeContainer {  
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px; 
+    border-radius: 3px;  
+  }
+  
+  .apllicationTypeContainer section div { 
+      display: flex;
+      justify-content: start;
+      align-items: center;
+      text-transform: capitalize;
+      border-radius: 1px; 
+      gap: 10px;
+      padding: 5px 30px; 
+  }
+   
+  

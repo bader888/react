@@ -5,6 +5,7 @@ import MyTable from "../../../Components/Table/Table";
 import Header from "../../../Components/header/Header";
 import { Add } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
+import MainHeader from "../../../Components/MainHeader/MainHeader";
 
 const ListUsersPage = () => {
   const [user, setUser] = useState({ UserData });
@@ -27,7 +28,7 @@ const ListUsersPage = () => {
 
   return (
     <div>
-      <Container  maxwidth={"md"}  className="Container" >
+      <Container  maxwidth={"md"}  className="Container" > 
         <div>
           <Header title={"manage users"} />
 

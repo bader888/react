@@ -12,6 +12,7 @@ import {
 } from "@mui/icons-material";
 import { clsUser, UserData } from "../../../Module/clsUsers";
 import Swal from "sweetalert2"; 
+import '../../../Global/Global.css'
 
 const UserCard = forwardRef((UserID,ref) => {
   const [user, setUser] = useState({ UserData }); 
@@ -48,28 +49,28 @@ const UserCard = forwardRef((UserID,ref) => {
 
   return (
     <div>
-      <section className="UserCard">
-        <div className="CardHeader">
+      <section className="UserCard shadow">
+        <div className="CardHeader shadow">
           <h2>User Details</h2>
         </div>
 
-        <div className="userid">
+        <div className="userid  shadow">
           <span>User ID</span>
           <i>
             <Numbers />
           </i>
-          <span id="lblUserID">{user.UserID}</span>
+          <span id="lblUserID shadow">{user.UserID}</span>
         </div>
 
-        <div className="username">
+        <div className="username shadow">
           <span>User Name</span>
           <i>
             <Person />
           </i>
-          <span id="lblUserName">{user.UserName}</span>
+          <span id="lblUserName shadow">{user.UserName}</span>
         </div>
 
-        <div className="permistions">
+        <div className="permistions shadow">
           <span>permistions</span>
           <i>
             <PermIdentity />
@@ -77,7 +78,7 @@ const UserCard = forwardRef((UserID,ref) => {
           <span id="lblpermistions">{user.Permisstions}</span>
         </div>
 
-        <div className="isactive">
+        <div className="isactive shadow">
           <span>Is Active </span>
           <i>
             <QuestionMark />

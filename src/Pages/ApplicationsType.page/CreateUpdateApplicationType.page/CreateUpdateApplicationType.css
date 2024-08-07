@@ -1,0 +1,21 @@
+ 
+
+.ApplicationTypeContainer section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+}
+
+
+.ApplicationTypeContainer section div div {
+    width: 100%;
+    
+}
+
+
+.ActionWrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 5px; 
+}

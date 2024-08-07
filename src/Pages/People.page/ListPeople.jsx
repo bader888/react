@@ -8,6 +8,7 @@ import { clsPerson } from "../../Module/clsPerson";
 import MyTable from "../../Components/Table/Table";
 import Header from "../../Components/header/Header";
 import { currentUser } from "../../Global/CurrentUser";
+import MainHeader from "../../Components/MainHeader/MainHeader";
 
 export default function ListPeople() {
   const [people, setPeople] = useState([]);
@@ -29,7 +30,7 @@ export default function ListPeople() {
   };
 
   return (
-    <div>
+    <div> 
       <Container maxWidth="lg" className="Container">
         <div>
           <Header title={"Manage People"} />
