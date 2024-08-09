@@ -1,0 +1,23 @@
+.detailsContainer
+{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.detailsContainer div
+{
+    display: flex;  
+    gap: 10px;
+    flex-wrap: wrap;
+    padding: 10px;
+}
+.detailsContainer div .key
+{
+ 
+}
+
+.detailsContainer div .value
+{
+ 
+}

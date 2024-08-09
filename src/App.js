@@ -12,6 +12,9 @@ import MainHeader from "./Components/MainHeader/MainHeader";
 import ListApplicationTypesPage from "./Pages/ApplicationsType.page/ListApplicationTypes.page/ListApplicationTypes.page";
 import ApplicationTypeInfoPage from "./Pages/ApplicationsType.page/ApplicationTypeInfo.page/ApplicationTypeInfo.page";
 import CreateUpdateApplicationTypePage from "./Pages/ApplicationsType.page/CreateUpdateApplicationType.page/CreateUpdateApplicationTypePage";
+import ListApplications from "./Pages/Applications.page/ListApplicationPage/ListApplications";
+import CreateUpdateApplication from "./Pages/Applications.page/CreateApplicationPage/CreateUpdateApplication";
+import ApplicationInfo from "./Pages/Applications.page/ApplicationInfoPage/ApplicationInfo";
 function App() {
   return (
     <div>
@@ -52,12 +55,25 @@ function App() {
             path="CreateApplicationType"
             element={<CreateUpdateApplicationTypePage mode={"create"} />}
           />
-        </Route>
-
+        </Route> 
         <Route
               path="UpdateApplicationType/:ID"
               element={<CreateUpdateApplicationTypePage mode={"update"} />}
-            /> 
+            />  
+
+
+        <Route path="/Applications">
+          <Route index element={<ListApplications />} />
+          <Route path="ApplicationDetails/:ID" element={<ApplicationInfo />} />
+          <Route
+            path="Create"
+            element={<CreateUpdateApplication mode={"create"} />}
+          />
+        </Route> 
+        <Route
+              path="UpdateApplication/:ID"
+              element={<CreateUpdateApplication mode={"update"} />}
+        />  
       </Routes>
     </div>
   );

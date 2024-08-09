@@ -1,19 +1,20 @@
 import { Container } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { clsApplicationType } from "../../../Module/clsApplicationsTypes";
-import { Money, Numbers, SettingsApplications } from "@mui/icons-material";
+import { clsApplicationType } from "../../../Module/clsApplicationsTypes";   
 import "./ApplicationtypeInfo.css";
 import Actions from "../../../Components/mainAction/Actions";
 import { useNavigate, useParams } from "react-router-dom";
 import Header from "../../../Components/header/Header";
 import Swal from "sweetalert2";
 import MyDialog from "../../../Components/myDialog/MyDialog";
+import MyDetails from "../../../Components/ClassDetails/MyDetails";
+
 
 const ApplicationTypeInfoPage = () => {
   const [openDialog, setOpenDialog] = useState(false);
   const { ID } = useParams("ID");
   const [data, setData] = useState({});
-  const Naviagator = useNavigate();
+  const Naviagator = useNavigate(); 
   useEffect(() => {
     async function FetchData() {
       const response = await clsApplicationType.FindbyID(ID);
@@ -63,31 +64,7 @@ const ApplicationTypeInfoPage = () => {
     <div>
       <Container maxWidth="md" className="apllicationTypeContainer shadow">
         <Header title={"Application Type Details"} />
-        <section>
-          <div className="shadow">
-            <span>ID</span>
-            <i>
-              <Numbers />
-            </i>
-            <span id="lblUserID shadow">{data.ApplicationTypeID}</span>
-          </div>
-
-          <div className="shadow">
-            <span>Application Type Title</span>
-            <i>
-              <SettingsApplications />
-            </i>
-            <span>{data.ApplicationTypeTitle}</span>
-          </div>
-
-          <div className="shadow">
-            <span>Application Fees</span>
-            <i>
-              <Money />
-            </i>
-            <span>{data.ApplicationFees}</span>
-          </div>
-        </section>
+       <MyDetails Data={data}  />
         <Actions
           BackAction={handleBackAction}
           DeleteAction={handleDeleteAction}
