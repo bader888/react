@@ -37,7 +37,7 @@ const ListApplications = () => {
             onClick={handleAddNew}
           >
             {" "}
-            Add New Application type
+            Add New Application
           </Button>
         </div>
         <MyTable handleRowClick={HandleRowClick} tableData={data} />

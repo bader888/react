@@ -5,7 +5,7 @@ import Actions from "../../../Components/mainAction/Actions";
 import MyDialog from "../../../Components/myDialog/MyDialog";
 import { clsApplication } from "../../../Module/clsApplications";
 import { useNavigate, useParams } from "react-router-dom";
-import Swal from "sweetalert2"; 
+import Swal from "sweetalert2";
 import MyDetails from "../../../Components/ClassDetails/MyDetails";
 
 const ApplicationInfo = () => {
@@ -16,11 +16,6 @@ const ApplicationInfo = () => {
   useEffect(() => {
     async function FetchData() {
       const response = await clsApplication.FindbyID(ID);
-      console.log(response);
-   let values = Object.values(response);
-   let keys = Object.keys(response);
-   console.log(values);
-   console.log(keys);
       setData(response);
     }
 
@@ -48,14 +43,14 @@ const ApplicationInfo = () => {
       const resp = await clsApplication.Remove(ID);
       console.log(resp);
       Swal.fire({
-        title: resp.IsSuccess ? "success" : "Faild",
-        text: resp.IsSuccess
+        title: resp.IsDeleted ? "success" : "Faild",
+        text: resp.IsDeleted
           ? "Application  removed"
           : "Faild to remove the application ",
-        icon: resp.IsSuccess ? "success" : "error",
+        icon: resp.IsDeleted ? "success" : "error",
       });
 
-      if (resp.IsSuccess) {
+      if (resp.IsDeleted) {
         Naviagator("/Applications");
       }
     } catch (error) {
@@ -66,7 +61,7 @@ const ApplicationInfo = () => {
     <div>
       <Container maxWidth="md" className="apllicationContainer shadow">
         <Header title={"Application Details"} />
-      <MyDetails Data={data}/>
+        <MyDetails Data={data} />
         <Actions
           BackAction={handleBackAction}
           DeleteAction={handleDeleteAction}
@@ -78,7 +73,7 @@ const ApplicationInfo = () => {
         handleClose={handleOnClose}
         handleConfirm={handleOnConfirm}
         message={
-          "Are you sure you want to delete this application? if you click confitm the application type will remove from the data base"
+          "Are you sure you want to delete this application? if you click confitm the application will remove from the data base"
         }
         title={"Delete Application"}
       />

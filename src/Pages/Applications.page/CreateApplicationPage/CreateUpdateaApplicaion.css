@@ -1,0 +1,13 @@
+
+.ApplicationContainer .Application {
+    display: flex;
+    flex-direction: column;
+    gap: 15px
+    ;
+    padding: 40px;
+}
+
+.ApplicationContainer  section .Compobox,
+.ApplicationContainer  section .FeesFeild,.ApplicationDate{
+    width: 100%;
+}

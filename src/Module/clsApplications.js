@@ -36,23 +36,25 @@ export class clsApplication {
         }
     }
 
-    static async Create(Application) {
+    static async Create({ Application }) {
         try {
         const response = await axios.post(
             `https://localhost:7180/Application/Create`,
             Application
         );
-        return response.data.Data;
+        return response.data;
         } catch (error) {
         console.log("error application type: " + error);
         }
     }
 
-    static async Update(Application, AppID) {
+    static async Update(ApplicationDate, AppID) {
+        const data = {"NewApplicationDate":ApplicationDate,"ApplicationID":AppID}
+        console.log(data);
         try {
         const response = await axios.put(
-            `https://localhost:7180/Application/Update/${AppID}`,
-            Application
+            `https://localhost:7180/Application/Update/${AppID}`,data
+            
         );
         return response.data.Data;
         } catch (error) {
