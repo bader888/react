@@ -5,20 +5,15 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import React from "react";
-import {  Button, ListItemIcon, ListItemText, Menu, MenuItem } from "@mui/material";
-import {
-  Delete,
-  Details, 
-  UpdateOutlined,
-} from "@mui/icons-material";
+import React, { useState } from "react";
+import { ListItemIcon, ListItemText, Menu, MenuItem } from "@mui/material";
+import { Delete, Details, UpdateOutlined } from "@mui/icons-material";
 
-const MyTable = ({ tableData, handleRowClick }) => {
+const MyTable = ({ tableData, handleRowClick , handleUpdate ,handleShowDetails,handleDelete}) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [RowID, setRowID] = useState(-1);
   const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+
   let th = [];
   let tr = [];
   for (let i = 0; i < tableData.length; i++) {
@@ -29,20 +24,29 @@ const MyTable = ({ tableData, handleRowClick }) => {
     tr.push(arr);
   }
 
+  const handleClick = (event) => { 
+    setAnchorEl(event.currentTarget);
+    setRowID(+event.currentTarget.children.item(0).textContent);
+    handleRowClick(event.currentTarget.children.item(0).textContent);
+  };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
 
-  const handleUpdate = () => {
+  const HandleUpdate = () => {
     handleClose();
+    handleUpdate(RowID);
   };
 
-  const handleDelete = () => {
+  const HandleDelete = () => {
     handleClose();
+    handleDelete(RowID);
   };
 
-  const handleShowDetails = () => {
+  const HandleShowDetails = () => {
     handleClose();
+    handleShowDetails(RowID);
   };
 
   for (let key in tableData[0]) {
@@ -72,7 +76,7 @@ const MyTable = ({ tableData, handleRowClick }) => {
             {tr.map((row, rowindex) => (
               <TableRow
                 key={rowindex}
-                onClick={() => handleRowClick(row[0])}
+                onClick={handleClick}
                 hover
                 sx={
                   rowindex % 2 === 0
@@ -107,21 +111,21 @@ const MyTable = ({ tableData, handleRowClick }) => {
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem onClick={handleShowDetails}>
+        <MenuItem onClick={HandleShowDetails}>
           <ListItemIcon>
             <Details />
           </ListItemIcon>
           <ListItemText>show Details</ListItemText>
         </MenuItem>
 
-        <MenuItem onClick={handleUpdate}>
+        <MenuItem onClick={HandleUpdate}>
           <ListItemIcon>
             <UpdateOutlined />
           </ListItemIcon>
           <ListItemText>Update</ListItemText>
         </MenuItem>
 
-        <MenuItem onClick={handleDelete}>
+        <MenuItem onClick={HandleDelete}>
           <ListItemIcon>
             <Delete />
           </ListItemIcon>

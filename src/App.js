@@ -38,17 +38,17 @@ function App() {
 
         <Route path="/Users">
           <Route index element={<ListUsersPage />} />
-          <Route path=":UserID" element={<UserInfoPage />} />
+          <Route path="Details/:UserID" element={<UserInfoPage />} />
           <Route
             path="ChangePassword/:UserID"
             element={<ChangePasswordPage />}
           />
           <Route path="Create" element={<CreateUser Mode={"create"} />} />
+          <Route
+            path="Update/:UserID"
+            element={<CreateUser Mode={"update"} />}
+          />
         </Route>
-        <Route
-          path="UpdateUser/:UserID"
-          element={<CreateUser Mode={"update"} />}
-        />
 
         <Route path="/ApplicationTypes">
           <Route index element={<ListApplicationTypesPage />} />
