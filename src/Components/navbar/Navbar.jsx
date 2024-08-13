@@ -16,6 +16,7 @@ import ApplicationsIcon from "../../Resources/Applications 64.png";
 import DriversIcon from "../../Resources/Drivers 64.png";
 import TestsIcon from "../../Resources/Test Type 64.png"; 
 import ApplicationTypesIcon from "../../Resources/Application Types 64.png";
+import TestAppointments from "../../Resources/TestType 32.png";
 import HomeIcon from "@mui/icons-material/Home";
 
 import MenuIcon from "@mui/icons-material/Menu";
@@ -29,6 +30,7 @@ export default function Navbar() {
     DriversIcon,
     TestsIcon,
     ApplicationTypesIcon,
+    TestAppointments
   ];
   const [open, setOpen] = React.useState(false);
 
@@ -47,6 +49,7 @@ export default function Navbar() {
           "Drivers",
           "Test Types",
           "Application Types",
+          "Test Appointments"
         ].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton>
