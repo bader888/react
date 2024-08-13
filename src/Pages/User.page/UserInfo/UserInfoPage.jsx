@@ -15,42 +15,39 @@ const UserInfoPage = () => {
 
   useEffect(() => {
     refUserCard.current.FoundUser(UserID);
-  }, []);
+  }, [UserID]);
 
   function HandleBackAction() {
     redirect("/Users");
   }
 
+  const HandleUpdateAction = () => {
+    Swal.fire({ title: "not implemented yet" });
+  };
+
   async function HandleDeleteAction() {
     setOpen(true);
-
   }
 
   async function handleCloseDialoge() {
     setOpen(false);
-
   }
-  const HandleUpdateAction = () => { 
-    redirect(`/UpdateUser/${UserID}`)
-  };
 
   const handleConfirmDelete = async () => {
     setOpen(false);
 
     try {
-      const response = await clsUser.Delete(UserID); 
+      const response = await clsUser.Delete(UserID);
       Swal.fire({
-        title:response.Success === true? "Success": "Oppps!",
-        text: response.Message ,
+        title: response.Success === true ? "Success" : "Oppps!",
+        text: response.Message,
         icon: response.Success === true ? "success" : "error",
       });
 
-      if(response.Success === true)
-        redirect("/Users");
-
+      if (response.Success === true) redirect("/Users");
     } catch (error) {
       console.error(error);
-    } 
+    }
   };
 
   return (
@@ -64,15 +61,14 @@ const UserInfoPage = () => {
         />
       </Container>
 
-      
       <MyDialog
-          Open={open}
-          handleConfirm={handleConfirmDelete}
-          handleClose={handleCloseDialoge}
-          message={`if you click Confirm button you can't undo the change, and the
+        Open={open}
+        handleConfirm={handleConfirmDelete}
+        handleClose={handleCloseDialoge}
+        message={`if you click Confirm button you can't undo the change, and the
             User with ID =  "${UserID}" will remove from the database`}
-          title={`Are You Sure you want to delete User with id = "${UserID}"`}
-        />
+        title={`Are You Sure you want to delete User with id = "${UserID}"`}
+      />
     </div>
   );
 };
