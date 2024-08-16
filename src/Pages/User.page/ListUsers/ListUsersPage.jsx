@@ -21,7 +21,7 @@ const ListUsersPage = () => {
   };
 
   const handleRowClick = (userid) => {
-    //redirect(`/Users/${userid}`);
+    console.log(userid);
   };
 
   const HandleShowDetails = (userid) => {
@@ -68,7 +68,7 @@ const ListUsersPage = () => {
           tableData={user}
           handleUpdate={HandleUpdate}
           handleDelete={HandleDelete}
-          handleRowClick={handleRowClick}
+          HandleRowClick={handleRowClick}
           handleShowDetails={HandleShowDetails}
         />
       </Container>
