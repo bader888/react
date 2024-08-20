@@ -6,11 +6,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
-const MyTable = ({
-  tableData,
-  HandleRowClick
-}) => {
-
+const MyTable = ({ tableData, HandleRowClick }) => {
   let th = [];
   let tr = [];
   for (let i = 0; i < tableData.length; i++) {
@@ -20,8 +16,19 @@ const MyTable = ({
     }
     tr.push(arr);
   }
-  const handleRowClick = (rowID) => {
-    HandleRowClick(rowID);
+  const handleRowClick = (event) => {
+  for(let i =0 ; i <  event.target.parentElement.parentElement.children.length ; i++ )
+    {
+      if(i % 2 ===0)
+      {
+        event.target.parentElement.parentElement.children[i].style.background = '#fff'
+      }else
+      {
+        event.target.parentElement.parentElement.children[i].style.background = '#eee' 
+      }
+    }  
+    event.target.parentElement.style.background  = '#FFAF00';
+    HandleRowClick(event.target.parentElement.children[0].innerHTML);
   };
 
   for (let key in tableData[0]) {
@@ -32,9 +39,7 @@ const MyTable = ({
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead sx={{ background: "#96C9F4" }}>
-            <TableRow
-              id="basic-button" 
-            >
+            <TableRow id="basic-button">
               {th.map((headname, index) => (
                 <TableCell component={"th"} key={index} align="center">
                   {headname}
@@ -47,7 +52,7 @@ const MyTable = ({
             {tr.map((row, rowindex) => (
               <TableRow
                 key={rowindex}
-                onClick={() => handleRowClick(row[0])}
+                onClick={handleRowClick}
                 hover
                 sx={
                   rowindex % 2 === 0

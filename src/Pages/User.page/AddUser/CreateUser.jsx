@@ -11,67 +11,69 @@ import Swal from "sweetalert2";
 import "./CreateUser.css";
 import Header from "../../../Components/header/Header";
 import { useParams } from "react-router-dom";
-import { clsUser } from "../../../Module/clsUsers";
+import { clsUser, UserData } from "../../../Module/clsUsers";
 
 export default function CreateUser({ Mode }) {
   const [value, setValue] = React.useState("1");
   const [personID, setPersonID] = React.useState(-1);
-  const [mode, setMode] = React.useState("");
-  const [header, setHeader] = React.useState("");
-  const {UserID} = useParams();
+  const [mode, setMode] = React.useState(""); 
+  const { UserID } = useParams();
+  const [userData, setUserData] = React.useState({});
 
   React.useEffect(() => {
     setMode(Mode);
-    if (mode === "create") {
-      setHeader("Add New User");
-    }else{
-      setHeader("Update User");
-      clsUser.findUser(UserID).then((data) =>{
-      console.log("Not implemented yet");
-      }) 
+    if (mode === "update") { 
+      try {
+        clsUser.findUser(UserID).then((data) => {  
+          setUserData(data);
+          console.log(userData);
+        });
+      } catch (error) {
+        console.error(error);
+      }
     }
-  }, []);
+  }, [Mode, UserID, mode]);
 
   const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
-  const WhenPersonFound = (PersonID) => {
-    setPersonID(PersonID);
-  };
-
-  const WhenUserSave = (Data) => {
-    if (Data.Success === true) {
-      Swal.fire({
-        title: "Success",
-        text: Data.Message,
-      });
-    } else {
-      Swal.fire({
-        title: "Faild!",
-        text: Data.Message,
-      });
+    if(userData.PersonID !== -1)
+    {
+      setValue(newValue); 
+      return;
     }
+    
+    Swal.fire("please select Person First");
   };
+
+  const WhenPersonFound = (personID) => {
+    setPersonID(personID);
+    setUserData({...userData,PersonID:personID})
+  };
+
+ 
 
   return (
     <Container maxWidth={"md"} className="Container">
-      <Header title={header} />
+      <Header title={mode ==='update'?`Update User with id = ${UserID}`:"Create User"} />
       <Box sx={{ width: "100%", typography: "body1" }}>
         <TabContext value={value}>
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-            <TabList onChange={handleChange} aria-label="lab API tabs example">
+            <TabList onChange={handleChange}>
               <Tab label="Select Person" value="1" />
               <Tab label="User Info." value="2" />
             </TabList>
           </Box>
           <TabPanel value="1">
+            <div>
+              <h6>{mode ==='update'?`the person Id = ${userData.PersonID}`:''}</h6>
+            </div>
             <PersonCardWithFilter handleWhenPersonFound={WhenPersonFound} />
           </TabPanel>
           <TabPanel value="2">
             <CreateUserDetials
               personID={personID}
-              handleWhenUserSave={WhenUserSave}
+              UserData={userData}
+              UserID ={UserID} 
+              mode={mode}
             />
           </TabPanel>
         </TabContext>

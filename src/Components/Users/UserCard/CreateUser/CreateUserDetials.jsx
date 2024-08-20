@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./CreateUserDetails.css";
 import {
   Box,
@@ -8,58 +8,55 @@ import {
   TextField,
 } from "@mui/material";
 import {
+  ArrowBackIosNew,
   ConfirmationNumberOutlined,
   Password,
   Person,
+  Save,
 } from "@mui/icons-material";
 import { clsUser, CreateUserData } from "../../../../Module/clsUsers";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
-const permissions = {
-  manageUsers: 1,
-  managePeople: 2,
-  manageApplicationas: 4,
-  manageDrivers: 8,
-  manageTests: 16,
-  manageAppointments: 32,
-};
 
 const checkboxsInfo = [
   {
-    value: permissions.manageUsers,
+    permission: 1,
     text: "Manage users",
   },
   {
-    value: permissions.managePeople,
+    permission:2,
     text: "Manage people",
   },
   {
-    value: permissions.manageDrivers,
+    permission:8,
     text: "Manage drivers",
   },
   {
-    value: permissions.manageApplicationas,
+    permission: 4,
     text: "Manage applications",
-  },
-  {
-    value: permissions.manageTests,
-    text: "Manage tests",
-  },
-  {
-    value: permissions.manageAppointments,
-    text: "Manage appointments",
   },
 ];
 
-const CreateUserDetials = ({ personID, handleWhenUserSave }) => {
+const CreateUserDetials = ({
+  mode,
+  personID, 
+  UserData, 
+}) => {
   const [userData, setUserData] = useState(CreateUserData);
   const [array, setArray] = useState([]);
   const [error, setError] = useState({
     UsernameError: false,
     PasswordError: false,
-    borderError:false
+    borderError: false,
   });
   const redierct = useNavigate();
+  useEffect(() => { 
+    if (mode === "update") {
+      setUserData(UserData);
+      console.log(UserData);
+    }
+  }, [personID, UserData, mode]);
 
   const validateForm = () => {
     let hasError = false;
@@ -78,14 +75,12 @@ const CreateUserDetials = ({ personID, handleWhenUserSave }) => {
       setError((prevState) => ({ ...prevState, PasswordError: false }));
     }
 
-    if (userData.Permisstions === 0) {
+    if (userData.Permisstions === 0 || userData.Permisstions === "") {
       setError((prevState) => ({ ...prevState, borderError: true }));
       hasError = true;
     } else {
       setError((prevState) => ({ ...prevState, borderError: false }));
     }
-
-  
     return !hasError; // Return true if there's no error
   };
 
@@ -96,19 +91,39 @@ const CreateUserDetials = ({ personID, handleWhenUserSave }) => {
     } else {
       setArray(array.filter((element) => element !== value));
     }
+
+    const UserPermissions = array.reduce(
+      (acc, val) => acc + parseInt(val, 10),
+      0
+    );
+
+    setUserData({
+      ...userData,
+      Permisstions: UserPermissions,
+      PersonID: personID,
+    });
+
+
   };
 
   const handleOnSave = async () => {
- 
     if (validateForm()) {
-      try {
-        const respons = await clsUser.createUser(userData);
-        handleWhenUserSave(respons); 
-      } catch (error) {
-        console.error(error);
-      } 
-    } 
-
+      if (mode === "update") { 
+        try {
+          const resp = await clsUser.Update(userData, userData.UserID);
+          Swal.fire(resp.Message);
+        } catch (error) {
+          console.error(error);
+        }
+      } else { 
+        try {
+          const resp = await clsUser.createUser(userData);
+          Swal.fire(resp.Message);
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    }
   };
 
   const handleOnBack = () => {
@@ -116,6 +131,7 @@ const CreateUserDetials = ({ personID, handleWhenUserSave }) => {
   };
 
   const handleOnConfirmPermissions = () => {
+    validateForm();
     const UserPermissions = array.reduce(
       (acc, val) => acc + parseInt(val, 10),
       0
@@ -129,17 +145,12 @@ const CreateUserDetials = ({ personID, handleWhenUserSave }) => {
   };
 
   const handleTextChange = (event) => {
-
     validateForm();
 
     const { name, value } = event.target;
     setUserData({ ...userData, [name]: value });
   };
-
-  const handleOnReset = () => {
-    console.log("handle reset btn");
-  };
-
+  
   return (
     <div>
       <Container maxWidth={"md"}>
@@ -147,7 +158,7 @@ const CreateUserDetials = ({ personID, handleWhenUserSave }) => {
           <TextField
             required
             error={error.UsernameError}
-            helperText={error.UsernameError === true?"Can't be empty":" "}
+            helperText={error.UsernameError === true ? "Can't be empty" : " "}
             name="UserName"
             label="User Name"
             value={userData.UserName}
@@ -163,8 +174,8 @@ const CreateUserDetials = ({ personID, handleWhenUserSave }) => {
           <TextField
             required
             error={error.PasswordError}
-            helperText={error.PasswordError=== true?"Can't be empty":" "}
-            name="Password" 
+            helperText={error.PasswordError === true ? "Can't be empty" : " "}
+            name="Password"
             label="Password"
             type="password"
             value={userData.Password}
@@ -179,43 +190,60 @@ const CreateUserDetials = ({ personID, handleWhenUserSave }) => {
           />
         </Box>
 
-        <Box className={`checkbox-container container ${error.borderError === true? 'ShowBorderError':'HideBorderError'}`} >
+        <Box
+          className={`checkbox-container container ${
+            error.borderError === true ? "ShowBorderError" : "HideBorderError"
+          }`}
+        >
           <h4>User Permissions</h4>
           <section className="formgroup-container" id="checkBoxsContainer">
             {checkboxsInfo.map((element, index) => (
-              <div>
+              <div key={index}>
                 <input
                   className="check"
                   onChange={handleCheckboxChange}
                   name="Permisstion"
                   type="checkbox"
-                  value={element.value}
+                  value={element.permission} 
                 />
                 <label>{element.text}</label>
               </div>
             ))}
-            <div>
-              <Button
-                onClick={handleOnConfirmPermissions}
-                color="info"
-                endIcon={<ConfirmationNumberOutlined />}
-              >
-                Confirm Permissions
-              </Button>
-            </div>
           </section>
-          <section  className={`${error.borderError === true? 'ShowPermissionsMessage':'HidePermissionsMessage'}`}>
+          <section
+            className={`${
+              error.borderError === true
+                ? "ShowPermissionsMessage"
+                : "HidePermissionsMessage"
+            }`}
+          >
             confirm permissions or select one!!!
           </section>
+          <div>
+            <Button
+              onClick={handleOnConfirmPermissions}
+              color="info"
+              endIcon={<ConfirmationNumberOutlined />}
+            >
+              Confirm Permissions
+            </Button>
+          </div>
         </Box>
         <Box className="container btnActionContainer">
-          <Button onClick={handleOnSave} color="info">
+          <Button
+            onClick={handleOnSave}
+            color="info"
+            variant="outlined"
+            endIcon={<Save />}
+          >
             save
           </Button>
-          <Button onClick={handleOnReset} variant="text" color="error">
-            reset
-          </Button>
-          <Button onClick={handleOnBack} variant="text" color="info">
+          <Button
+            onClick={handleOnBack}
+            variant="outlined"
+            endIcon={<ArrowBackIosNew />}
+            color="info"
+          >
             Back
           </Button>
         </Box>
