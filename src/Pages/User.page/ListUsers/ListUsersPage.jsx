@@ -14,6 +14,8 @@ import personDetails from "../../../Resources/PersonDetails 32.png";
 import DeleteUserImg from "../../../Resources/Delete 32 2.png";
 import UpdateUserImg from "../../../Resources/User 32 -2.png";
 import CreateUserImg from "../../../Resources/Add New User 32.png";
+import ActiveUserImg from "../../../Resources/refresh.png";
+import DeActiveUserImg from "../../../Resources/delete.png";
 import { Divider } from "@mui/material";
 
 const ListUsersPage = () => {
@@ -22,6 +24,7 @@ const ListUsersPage = () => {
   const redirect = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+
   const handleClick = (event) => {
     if (userID === 0) {
       Swal.fire("Please select user first");
@@ -29,15 +32,13 @@ const ListUsersPage = () => {
     }
     setAnchorEl(event.currentTarget);
   };
-  useEffect(() => {
-    try{
 
+  useEffect(() => {
+    try {
       clsUser.GetAllUsers().then((resp) => {
         setUser(resp);
       });
-
-    }catch(error)
-    {
+    } catch (error) {
       Swal.fire(error);
       console.error(error);
     }
@@ -63,6 +64,19 @@ const ListUsersPage = () => {
     redirect(`Update/${userID}`);
   };
 
+  const handleToggleActive =async (isActive) => {
+    try {
+      const resp = await clsUser.ToggleActive(userID,isActive)
+      Swal.fire(resp.Message);
+      clsUser.GetAllUsers().then((resp) => {
+        setUser(resp);
+      });
+      
+    } catch (error) {
+      console.error(error);
+    }
+  };
+ 
   const handleRemove = async () => {
     try {
       const response = await clsUser.Delete(1);
@@ -95,10 +109,12 @@ const ListUsersPage = () => {
           >
             Actions
           </Button>
-          <Button      variant="outlined"
+          <Button
+            variant="outlined"
             style={{ marginBottom: "10px", marginLeft: "20px" }}
             startIcon={<Add />}
-            onClick={handleAddNew}>
+            onClick={handleAddNew}
+          >
             Create User
           </Button>
         </div>
@@ -130,6 +146,19 @@ const ListUsersPage = () => {
               <img src={UpdateUserImg} alt="person details" />
             </ListItemIcon>
             <ListItemText>Update User</ListItemText>
+          </MenuItem>
+          <Divider />
+          <MenuItem onClick={() => {handleToggleActive(false)}}>
+            <ListItemIcon>
+              <img src={DeActiveUserImg} alt="person details" />
+            </ListItemIcon>
+            <ListItemText>Deactivate User</ListItemText>
+          </MenuItem>
+          <MenuItem onClick={() => {handleToggleActive(true)}}>
+            <ListItemIcon>
+              <img src={ActiveUserImg} alt="person details" />
+            </ListItemIcon>
+            <ListItemText>Activate User</ListItemText>
           </MenuItem>
           <Divider />
           <MenuItem onClick={handleRemove}>
