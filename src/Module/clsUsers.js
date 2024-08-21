@@ -68,8 +68,7 @@ export class clsUser {
       const response = await axios.get("https://localhost:7180/User/ListUsers");
       return response.data.Data;
     } catch (error) {
-      console.error("Error getting all people:", error);
-      throw error;
+      console.error("Error getting all people:", error); 
     }
   }
 

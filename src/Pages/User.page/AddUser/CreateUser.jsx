@@ -11,22 +11,21 @@ import Swal from "sweetalert2";
 import "./CreateUser.css";
 import Header from "../../../Components/header/Header";
 import { useParams } from "react-router-dom";
-import { clsUser, UserData } from "../../../Module/clsUsers";
+import { clsUser } from "../../../Module/clsUsers";
 
 export default function CreateUser({ Mode }) {
   const [value, setValue] = React.useState("1");
   const [personID, setPersonID] = React.useState(-1);
-  const [mode, setMode] = React.useState(""); 
+  const [mode, setMode] = React.useState("");
   const { UserID } = useParams();
   const [userData, setUserData] = React.useState({});
 
   React.useEffect(() => {
     setMode(Mode);
-    if (mode === "update") { 
+    if (mode === "update") {
       try {
-        clsUser.findUser(UserID).then((data) => {  
+        clsUser.findUser(UserID).then((data) => {
           setUserData(data);
-          console.log(userData);
         });
       } catch (error) {
         console.error(error);
@@ -35,25 +34,26 @@ export default function CreateUser({ Mode }) {
   }, [Mode, UserID, mode]);
 
   const handleChange = (event, newValue) => {
-    if(userData.PersonID !== -1)
-    {
-      setValue(newValue); 
+    if (userData.PersonID !== -1) {
+      setValue(newValue);
       return;
     }
-    
+
     Swal.fire("please select Person First");
   };
 
   const WhenPersonFound = (personID) => {
     setPersonID(personID);
-    setUserData({...userData,PersonID:personID})
+    setUserData({ ...userData, PersonID: personID });
   };
-
- 
 
   return (
     <Container maxWidth={"md"} className="Container">
-      <Header title={mode ==='update'?`Update User with id = ${UserID}`:"Create User"} />
+      <Header
+        title={
+          mode === "update" ? `Update User with id = ${UserID}` : "Create User"
+        }
+      />
       <Box sx={{ width: "100%", typography: "body1" }}>
         <TabContext value={value}>
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
@@ -64,7 +64,11 @@ export default function CreateUser({ Mode }) {
           </Box>
           <TabPanel value="1">
             <div>
-              <h6>{mode ==='update'?`the person Id = ${userData.PersonID}`:''}</h6>
+              <h6>
+                {mode === "update"
+                  ? `the person Id = ${userData.PersonID}`
+                  : ""}
+              </h6>
             </div>
             <PersonCardWithFilter handleWhenPersonFound={WhenPersonFound} />
           </TabPanel>
@@ -72,7 +76,7 @@ export default function CreateUser({ Mode }) {
             <CreateUserDetials
               personID={personID}
               UserData={userData}
-              UserID ={UserID} 
+              UserID={UserID}
               mode={mode}
             />
           </TabPanel>
