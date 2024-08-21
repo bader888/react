@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { Button, Container, TextField } from "@mui/material";
 import "./FilterHeader.css";
-import { Search } from "@mui/icons-material";
+import { Add, Search, SearchOff } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 
 const FilterHeader = ({ handleSearchClick, searchLable }) => {
   const [value, setValue] = useState("");
-
+const navigator = useNavigate();
   function sendValueToParent() { 
     handleSearchClick(value);
   }
@@ -15,6 +16,10 @@ const FilterHeader = ({ handleSearchClick, searchLable }) => {
     setValue(value);
   }
 
+  function handleSeePeople() { 
+     navigator("/People")
+  }
+ 
   return (
     <div>
       <section className="filterContainer">
@@ -26,6 +31,13 @@ const FilterHeader = ({ handleSearchClick, searchLable }) => {
         >
           search
         </Button>
+        <Button
+          onClick={handleSeePeople}
+          variant="outlined"
+          startIcon={<SearchOff />}
+        >
+          see people
+        </Button> 
       </section>
     </div>
   );

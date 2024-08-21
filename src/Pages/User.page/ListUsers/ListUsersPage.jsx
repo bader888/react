@@ -8,14 +8,24 @@ import UserContextMenu from "../../../Components/ContextMenu/UserContextMenu";
 import { useNavigate } from "react-router-dom";
 import "./ListUserPage.css";
 
-const users = await clsUser.GetAllUsers();
-
-const ListUsersPage = () => { 
-  const [userID, setUserID] = useState(0); 
+const ListUsersPage = () => {
+  const [userID, setUserID] = useState(0);
+  const [users, setUsers] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
   const redirect = useNavigate();
-  const [searchTerm, setSearchTerm] = useState('');
-  
-  const FilterUsers = users.filter(user =>
+
+  useEffect(() => {
+    clsUser
+      .GetAllUsers()
+      .then((resp) => {
+        setUsers(resp);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
+  const FilterUsers = users.filter((user) =>
     user.UserName.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -27,32 +37,32 @@ const ListUsersPage = () => {
   const handleRowClick = (ID) => {
     setUserID(ID);
   };
- 
+
   return (
     <div>
       <Container maxwidth={"md"} className="Container">
         <div>
           <Header title={"manage users"} />
           <div className="UserActionContainer">
-            <UserContextMenu UserID={userID} />
-            <Button
-              variant="outlined"
-              startIcon={<Add />}
-              onClick={handleAddNew}
-            >
-              Create User
-            </Button>
-          </div>
-          <div className="filterContainer">
+            <UserContextMenu UserID={userID}  />
+            <div>
+              <Button
+                variant="outlined"
+                startIcon={<Add />}
+                onClick={handleAddNew} 
+              >
+                Create User
+              </Button>
+            </div>
             <TextField
               label="filter"
               placeholder="write user name"
-              onChange={e => setSearchTerm(e.target.value)} 
+              onChange={(e) => setSearchTerm(e.target.value)}
               value={searchTerm}
-            /> 
+              sx={{ flexGrow: 3 }} 
+            />
           </div>
         </div>
-
         <MyTable tableData={FilterUsers} HandleRowClick={handleRowClick} />
       </Container>
     </div>
