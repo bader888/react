@@ -26,20 +26,28 @@ function App() {
         {<Route path="/" element={<HomePage />} />}
         {<Route path="/login" element={<LoginPage />} />}
 
-        <Route path="/People">
+        <Route path={clsNavigator.PeopleNavgate.ListPeoplePage}>
           <Route index element={<ListPeople />} />
-          <Route path=":PersonID" element={<PresonDetails />} />
-          <Route path="Create" element={<CreatePerson Mode={"Create"} />} />
+          <Route
+            path={clsNavigator.PeopleNavgate.ShowUserDetailsPage}
+            element={<PresonDetails />}
+          />
+          <Route
+            path={clsNavigator.PeopleNavgate.CreatePersonPage}
+            element={<CreatePerson Mode={"Create"} />}
+          />
+          <Route
+            path={clsNavigator.PeopleNavgate.UpdatePersonPage}
+            element={<CreatePerson Mode={"Update"} />}
+          />
         </Route>
-
-        <Route
-          path="update/:PersonID"
-          element={<CreatePerson Mode={"Update"} />}
-        />
 
         <Route path={clsNavigator.UserNavgate.UsersPage}>
           <Route index element={<ListUsersPage />} />
-          <Route path={clsNavigator.UserNavgate.UserDetailsPage} element={<UserInfoPage />} />
+          <Route
+            path={clsNavigator.UserNavgate.UserDetailsPage}
+            element={<UserInfoPage />}
+          />
           <Route
             path="ChangePassword/:UserID"
             element={<ChangePasswordPage />}

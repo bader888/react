@@ -15,4 +15,20 @@ export default class clsNavigator
             return `Details/${ID}`;
         }
     }
+
+    static PeopleNavgate = 
+    {
+        ListPeoplePage:"People", 
+        CreatePersonPage:"Create",
+        UpdatePersonPage:"Update/:PersonID",
+        ShowUserDetailsPage:"Details/:PersonID",
+        UpdatePersonPageWithID(PersonID)
+        {
+            return `Update/${PersonID}`
+        },
+        ShowPersonDetailsWithID(PersonID)
+        {
+            return `Details/${PersonID}`
+        }
+    }
 } 
