@@ -3,10 +3,11 @@ import { clsUser } from "../../../Module/clsUsers";
 import { Button, Container, TextField } from "@mui/material";
 import MyTable from "../../../Components/Table/Table";
 import Header from "../../../Components/header/Header";
-import { Add, Search } from "@mui/icons-material";
+import { Add } from "@mui/icons-material";
 import UserContextMenu from "../../../Components/ContextMenu/UserContextMenu";
 import { useNavigate } from "react-router-dom";
 import "./ListUserPage.css";
+import clsNavigator from "../../../Urls/Navgator";
 
 const ListUsersPage = () => {
   const [userID, setUserID] = useState(0);
@@ -29,9 +30,8 @@ const ListUsersPage = () => {
     user.UserName.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const handleAddNew = () => {
-    console.log("add new user clicked");
-    redirect("/Users/Create");
+  const handleAddNew = () => { 
+    redirect(clsNavigator.UserNavgate.CreateUserPage);
   };
 
   const handleRowClick = (ID) => {

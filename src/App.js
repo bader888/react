@@ -17,6 +17,8 @@ import CreateUpdateApplication from "./Pages/Applications.page/CreateApplication
 import ApplicationInfo from "./Pages/Applications.page/ApplicationInfoPage/ApplicationInfo";
 import ListTypePage from "./Pages/TestType.page/ListTestTypePage/ListTypePage";
 import UpdateTestTypePage from "./Pages/TestType.page/UpdateTestTypePage/UpdateTestTypePage";
+import Navigator from "./Urls/Navgator";
+import clsNavigator from "./Urls/Navgator";
 function App() {
   return (
     <div>
@@ -36,9 +38,9 @@ function App() {
           element={<CreatePerson Mode={"Update"} />}
         />
 
-        <Route path="/Users">
+        <Route path={clsNavigator.UserNavgate.UsersPage}>
           <Route index element={<ListUsersPage />} />
-          <Route path="Details/:UserID" element={<UserInfoPage />} />
+          <Route path={clsNavigator.UserNavgate.UserDetailsPage} element={<UserInfoPage />} />
           <Route
             path="ChangePassword/:UserID"
             element={<ChangePasswordPage />}

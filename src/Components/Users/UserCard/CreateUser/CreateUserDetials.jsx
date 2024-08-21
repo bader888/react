@@ -17,6 +17,7 @@ import {
 import { clsUser, CreateUserData } from "../../../../Module/clsUsers";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import clsNavigator from "../../../../Urls/Navgator";
 
 
 const checkboxsInfo = [
@@ -127,7 +128,7 @@ const CreateUserDetials = ({
   };
 
   const handleOnBack = () => {
-    redierct("/Users");
+    redierct(clsNavigator.UserNavgate.UsersPage);
   };
 
   const handleOnConfirmPermissions = () => {

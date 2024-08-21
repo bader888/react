@@ -14,6 +14,7 @@ import DeActiveUserImg from "../../Resources/delete.png";
 import { Button, Divider } from "@mui/material";
 import { AddCard } from "@mui/icons-material";
 import { clsUser } from "../../Module/clsUsers";
+import clsNavigator from "../../Urls/Navgator";
 
 const UserContextMenu = ({ UserID }) => { 
   const redirect = useNavigate();
@@ -29,7 +30,7 @@ const UserContextMenu = ({ UserID }) => {
   };
 
   const handleAddNew = () => {
-    redirect("/Users/Create");
+    redirect(clsNavigator.UserNavgate.CreateUserPage);
   };
 
   const handleClose = () => {
@@ -37,11 +38,11 @@ const UserContextMenu = ({ UserID }) => {
   };
 
   const handleShowDetails = () => {
-    redirect(`Details/${UserID}`);
+    redirect(clsNavigator.UserNavgate.UserDetailsPageWithID(UserID));
   };
 
   const handleUpdate = () => {
-    redirect(`Update/${UserID}`);
+    redirect(clsNavigator.UserNavgate.UpdateUserPageWithID(UserID));
   };
 
   const handleToggleActive = async (isActive) => {
@@ -71,8 +72,7 @@ const UserContextMenu = ({ UserID }) => {
   return (
     <div>
       <Button 
-        variant="outlined"
-        id="basic-button"
+        variant="outlined" 
         aria-controls={open ? "basic-menu" : undefined}
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}

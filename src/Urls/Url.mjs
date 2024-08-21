@@ -1,5 +1,7 @@
+const BASE_URL = "https://localhost:7180";
+
 export default class URL {
-  ListPeople() {
-    return "https://localhost:7122/Person/AllPeople"
-  }
+  static UserUrl = {
+    ListPeople: `${BASE_URL}/User/ListUsers`,
+  };
 }
