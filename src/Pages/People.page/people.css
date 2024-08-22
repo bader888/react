@@ -13,3 +13,8 @@
   align-items: center;
   flex-wrap: wrap;
 }
+
+.peopleActionContainer button
+{
+  padding: 15px;
+}

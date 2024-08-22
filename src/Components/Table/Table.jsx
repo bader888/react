@@ -51,6 +51,7 @@ const MyTable = ({ tableData, HandleRowClick }) => {
           <TableBody>
             {tr.map((row, rowindex) => (
               <TableRow
+              className="tableRow"
                 key={rowindex}
                 onClick={handleRowClick}
                 hover

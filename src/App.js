@@ -17,7 +17,8 @@ import CreateUpdateApplication from "./Pages/Applications.page/CreateApplication
 import ApplicationInfo from "./Pages/Applications.page/ApplicationInfoPage/ApplicationInfo";
 import ListTypePage from "./Pages/TestType.page/ListTestTypePage/ListTypePage";
 import UpdateTestTypePage from "./Pages/TestType.page/UpdateTestTypePage/UpdateTestTypePage";
-import clsNavigator from "./Urls/Navgator";
+import clsNavigator from "./Urls/Navgator";  
+
 function App() {
   return (
     <div>

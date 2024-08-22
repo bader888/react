@@ -16,6 +16,7 @@ import LocationOn from "@mui/icons-material/LocationOn";
 import Header from "../header/Header";
 import { person, clsPerson } from "../../Module/clsPerson";
 import Swal from "sweetalert2";
+import { DateToString } from "../../Formate/DataFormate";
 
 const PersonCard = forwardRef((PersonID, ref) => {
   const [Person, setPerson] = useState(person); 
@@ -114,7 +115,7 @@ const PersonCard = forwardRef((PersonID, ref) => {
             </span>
             <span>Gender: </span>
             <span id="lblGender">
-              {Person.Gendor == "0" ? "Female" : "Male"}
+              {Person.Gendor === "0" ? "Female" : "Male"}
             </span>
           </div>
 
@@ -131,7 +132,7 @@ const PersonCard = forwardRef((PersonID, ref) => {
               <CalendarMonthIcon />
             </span>
             <span>Date Of Birth: </span>
-            <span id="lblDateOfBirth">{Person.DateOfBirth}</span>
+            <span id="lblDateOfBirth">{DateToString(Person.DateOfBirth)}</span>
           </div>
 
           <div>
@@ -142,8 +143,7 @@ const PersonCard = forwardRef((PersonID, ref) => {
             <span id="lblCountry">{Person.NationalityCountryID}</span>
           </div>
         </div>
-      </Container>
-      <section></section>
+      </Container> 
     </div>
   );
 });

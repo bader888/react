@@ -5,3 +5,8 @@
     font-weight: bold;
     color: #676767;
 }
+
+.tableRow
+{
+    cursor: pointer;
+}

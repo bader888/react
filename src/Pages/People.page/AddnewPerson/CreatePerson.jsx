@@ -51,10 +51,10 @@ const CreatePerson = ({ Mode }) => {
     if (mode === "Update") {
       setPageTitle("Update Person");
       clsPerson.findPerson(PersonID).then((data) => {
-        setPersonData(data.PersonInfo); 
+        setPersonData(data.PersonInfo);
       });
-    } 
-    setPersonData({...PersonData,'LastName':" "});
+    }
+    setPersonData({ ...PersonData, LastName: " " });
   }, [mode, PersonID, Mode]);
 
   const handleCountryChage = async (event, newValue) => {
@@ -71,22 +71,26 @@ const CreatePerson = ({ Mode }) => {
 
   const hanleSave = async (e) => {
     e.preventDefault();
-    
-    console.log(PersonData)
+
+    console.log(PersonData);
     let response = null;
     if (mode === "Create") {
       response = await clsPerson.createPerson(PersonData);
-       console.log(response);
+      console.log(response);
     } else {
       response = await clsPerson.Update(PersonData, PersonID);
-      console.log(response); 
-    } 
+      console.log(response);
+    }
 
-    Swal.fire(response.Message);
+    Swal.fire({
+      title: response.Success ? "Success" : "Error!",
+      text: response.Message,
+      icon: response.Success ? "success" : "error",
+    });
   };
 
   const handleBack = () => {
-    redirect('/'+clsNavigator.PeopleNavgate.ListPeoplePage);
+    redirect("/" + clsNavigator.PeopleNavgate.ListPeoplePage);
   };
 
   return (
@@ -99,7 +103,7 @@ const CreatePerson = ({ Mode }) => {
         <h1 style={{ textAlign: "center" }}>{PageTitle}</h1>
         {/* full name national no */}
         <Box component={"section"} className="box">
-          <TextField 
+          <TextField
             id="nationalNumber"
             value={PersonData.NationalNo}
             name="NationalNo"
@@ -115,7 +119,7 @@ const CreatePerson = ({ Mode }) => {
             }}
           />
 
-          <TextField 
+          <TextField
             id="FirstName"
             value={PersonData.FirstName}
             name="FirstName"
@@ -131,7 +135,7 @@ const CreatePerson = ({ Mode }) => {
             }}
           />
 
-          <TextField 
+          <TextField
             id="SecondName"
             value={PersonData.SecondName}
             name="SecondName"
@@ -147,7 +151,7 @@ const CreatePerson = ({ Mode }) => {
             }}
           />
 
-          <TextField 
+          <TextField
             id="ThirdName"
             value={PersonData.ThirdName}
             name="ThirdName"
@@ -168,7 +172,7 @@ const CreatePerson = ({ Mode }) => {
         {/* email phone number address */}
 
         <Box component={"section"} className="box">
-          <TextField 
+          <TextField
             type="email"
             value={PersonData.Email}
             name="Email"
@@ -184,7 +188,7 @@ const CreatePerson = ({ Mode }) => {
             }}
           />
 
-          <TextField 
+          <TextField
             style={{ flex: "3" }}
             value={PersonData.Phone}
             name="Phone"
@@ -200,7 +204,7 @@ const CreatePerson = ({ Mode }) => {
             }}
           />
 
-          <TextField 
+          <TextField
             id="Address"
             value={PersonData.Address}
             name="Address"
@@ -223,10 +227,7 @@ const CreatePerson = ({ Mode }) => {
         <Box component={"section"} className="box">
           <FormControl>
             <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel>
-            <RadioGroup
-              row 
-              onChange={handleChange}
-            >
+            <RadioGroup row onChange={handleChange}>
               <FormControlLabel
                 value="0"
                 control={<Radio />}
@@ -250,11 +251,11 @@ const CreatePerson = ({ Mode }) => {
             options={options}
             getOptionLabel={(option) => option.CountryName}
             sx={{ width: 300 }}
-            onChange={handleCountryChage} 
+            onChange={handleCountryChage}
             renderInput={(params) => <TextField {...params} label="Iraq" />}
           />
 
-          <TextField 
+          <TextField
             value={DateToString(PersonData.DateOfBirth)}
             name="DateOfBirth"
             onChange={handleChange}

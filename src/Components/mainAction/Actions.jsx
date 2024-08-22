@@ -1,7 +1,6 @@
 import React from "react";
 import DeleteICon from "@mui/icons-material/Delete";
-import BackIcon from "@mui/icons-material/ArrowBackIosNewSharp";
-import EditIcon from "@mui/icons-material/Edit";
+import BackIcon from "@mui/icons-material/ArrowBackIosNewSharp"; 
 import { Button } from "@mui/material"; 
 
 import "./Action.css"
@@ -13,11 +12,7 @@ const Actions = ({BackAction,DeleteAction,UpdateAction}) => {
         BackAction();
     }
 
-    function handleOnClicUpdate()
-    {
-        UpdateAction();
-    }
-
+ 
     function handleOnClicKDelete()
     {
         DeleteAction();
@@ -33,15 +28,7 @@ const Actions = ({BackAction,DeleteAction,UpdateAction}) => {
         >
           Back
         </Button>
-
-        <Button
-          onClick={handleOnClicUpdate}
-          variant="outlined"
-          startIcon={<EditIcon />}
-        >
-          Update
-        </Button>
-
+ 
         <Button
           onClick={handleOnClicKDelete}
           variant="outlined"

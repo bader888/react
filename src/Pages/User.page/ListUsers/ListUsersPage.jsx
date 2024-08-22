@@ -48,6 +48,7 @@ const ListUsersPage = () => {
             <div>
               <Button
                 variant="outlined"
+                color="success"
                 startIcon={<Add />}
                 onClick={handleAddNew} 
               >

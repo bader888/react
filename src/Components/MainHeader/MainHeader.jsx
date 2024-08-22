@@ -5,7 +5,7 @@ import { Container } from "@mui/material";
 import MyMenu from "../Menu/MyMenu";
 import { useNavigate } from "react-router-dom";
 import { currentUser } from "../../Global/CurrentUser";
-
+import clsNavigator, {nav} from '../../Urls/Navgator'
 const MainHeader = () => {
   const redieric = useNavigate();
   const handleLogOut = () => {
@@ -13,7 +13,7 @@ const MainHeader = () => {
   };
 
   const handleCurrentUser = () => {
-    redieric(`/Users/${currentUser.UserID}`);
+    redieric("Users/"+clsNavigator.UserNavgate.UserDetailsPageWithID(currentUser.UserID));
   };
 
   const handleChangePassword = () => {
