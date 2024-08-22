@@ -30,6 +30,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { DateToString } from "../../../Formate/DataFormate";
 import { clsCountry } from "../../../Module/clsCountry";
 import { clsPerson, person } from "../../../Module/clsPerson";
+import clsNavigator from "../../../Urls/Navgator";
 
 const CreatePerson = ({ Mode }) => {
   const [options, setOptions] = useState([]);
@@ -50,18 +51,10 @@ const CreatePerson = ({ Mode }) => {
     if (mode === "Update") {
       setPageTitle("Update Person");
       clsPerson.findPerson(PersonID).then((data) => {
-        setPersonData(data.PersonInfo);
-        setPersonData({
-          ...data.PersonInfo,
-          FullName:
-            data.PersonInfo.FirstName +
-            " " +
-            data.PersonInfo.SecondName +
-            " " +
-            data.PersonInfo.ThirdName,
-        });
+        setPersonData(data.PersonInfo); 
       });
-    }
+    } 
+    setPersonData({...PersonData,'LastName':" "});
   }, [mode, PersonID, Mode]);
 
   const handleCountryChage = async (event, newValue) => {
@@ -78,34 +71,22 @@ const CreatePerson = ({ Mode }) => {
 
   const hanleSave = async (e) => {
     e.preventDefault();
-    const allnames = PersonData.FullName.split(" ");
-    setPersonData({
-      ...PersonData,
-      FirstName: allnames[0],
-      SecondName: allnames[1],
-      ThirdName: allnames[2],
-      LastName: " ",
-    });
+    
+    console.log(PersonData)
     let response = null;
     if (mode === "Create") {
       response = await clsPerson.createPerson(PersonData);
-      if (response.Success === true) {
-        redirect(`/update/${response.Data.PersonID}`);
-        setMode("Update");
-      }
+       console.log(response);
     } else {
       response = await clsPerson.Update(PersonData, PersonID);
-    }
+      console.log(response); 
+    } 
 
-    Swal.fire({
-      title: response.Success === true ? "success" : "Faild",
-      text: response.Message,
-      icon: response.Success === true ? "success" : "error",
-    });
+    Swal.fire(response.Message);
   };
 
   const handleBack = () => {
-    redirect("/people");
+    redirect('/'+clsNavigator.PeopleNavgate.ListPeoplePage);
   };
 
   return (
@@ -118,8 +99,7 @@ const CreatePerson = ({ Mode }) => {
         <h1 style={{ textAlign: "center" }}>{PageTitle}</h1>
         {/* full name national no */}
         <Box component={"section"} className="box">
-          <TextField
-            required
+          <TextField 
             id="nationalNumber"
             value={PersonData.NationalNo}
             name="NationalNo"
@@ -135,13 +115,44 @@ const CreatePerson = ({ Mode }) => {
             }}
           />
 
-          <TextField
-            required
-            id="FullName"
-            value={PersonData.FullName}
-            name="FullName"
+          <TextField 
+            id="FirstName"
+            value={PersonData.FirstName}
+            name="FirstName"
             onChange={handleChange}
-            label="Full Name"
+            label="First"
+            style={{ flex: "3" }}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <Person />
+                </InputAdornment>
+              ),
+            }}
+          />
+
+          <TextField 
+            id="SecondName"
+            value={PersonData.SecondName}
+            name="SecondName"
+            onChange={handleChange}
+            label="Second"
+            style={{ flex: "3" }}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <Person />
+                </InputAdornment>
+              ),
+            }}
+          />
+
+          <TextField 
+            id="ThirdName"
+            value={PersonData.ThirdName}
+            name="ThirdName"
+            onChange={handleChange}
+            label="Third"
             style={{ flex: "3" }}
             InputProps={{
               endAdornment: (
@@ -157,8 +168,7 @@ const CreatePerson = ({ Mode }) => {
         {/* email phone number address */}
 
         <Box component={"section"} className="box">
-          <TextField
-            required
+          <TextField 
             type="email"
             value={PersonData.Email}
             name="Email"
@@ -174,8 +184,7 @@ const CreatePerson = ({ Mode }) => {
             }}
           />
 
-          <TextField
-            required
+          <TextField 
             style={{ flex: "3" }}
             value={PersonData.Phone}
             name="Phone"
@@ -191,8 +200,7 @@ const CreatePerson = ({ Mode }) => {
             }}
           />
 
-          <TextField
-            required
+          <TextField 
             id="Address"
             value={PersonData.Address}
             name="Address"
@@ -216,10 +224,7 @@ const CreatePerson = ({ Mode }) => {
           <FormControl>
             <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel>
             <RadioGroup
-              row
-              aria-labelledby="demo-radio-buttons-grou  p-label"
-              defaultValue="female"
-              name="radio-buttons-group"
+              row 
               onChange={handleChange}
             >
               <FormControlLabel
@@ -245,12 +250,11 @@ const CreatePerson = ({ Mode }) => {
             options={options}
             getOptionLabel={(option) => option.CountryName}
             sx={{ width: 300 }}
-            onChange={handleCountryChage}
+            onChange={handleCountryChage} 
             renderInput={(params) => <TextField {...params} label="Iraq" />}
           />
 
-          <TextField
-            required
+          <TextField 
             value={DateToString(PersonData.DateOfBirth)}
             name="DateOfBirth"
             onChange={handleChange}

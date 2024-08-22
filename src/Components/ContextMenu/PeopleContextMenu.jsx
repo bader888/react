@@ -47,14 +47,12 @@ const PeopleContextMenu = ({ PersonID }) => {
 
   const handleRemove = async () => {
     try {
-      const response = await clsPerson.Delete(1);
+      const response = await clsPerson.Delete(PersonID);
       Swal.fire({
         title: response.Success === true ? "Success" : "Oppps!",
         text: response.Message,
         icon: response.Success === true ? "success" : "error",
-      });
-
-      if (response.Success === true) redirect("/Users");
+      }); 
     } catch (error) {
       console.error(error);
     }
