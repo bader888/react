@@ -2,13 +2,10 @@ import { Container } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Header from "../../../Components/header/Header";
 import MyTable from "../../../Components/Table/Table";
-import { clsTestType } from "../../../Module/clsTestType";
-import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
+import { clsTestType } from "../../../Module/clsTestType"; 
 
 const ListTypePage = () => {
-  const [data, setData] = useState([]);
-  const Navigate = useNavigate();
+  const [data, setData] = useState([]); 
   useEffect(() => {
     clsTestType.GetAll().then((data) => {
       setData(data);
@@ -19,9 +16,7 @@ const ListTypePage = () => {
     console.log(ID);
     
   };
-
   
- 
   return (
     <div>
       <Container maxWidth="md" className="Container">

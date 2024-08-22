@@ -59,4 +59,14 @@ export class clsApplicationType {
       console.log("error application type: " + error);
     }
   }
+
+  Applications = { 
+   	IssueDrivingLicenseServiceFirstTime:1,
+	RenewDrivingLicenseService:2,
+	ReplacementforLostDrivingLicense:3,
+	ReplacementforDamagedDrivingLicense:4,
+	ReleaseDetainedDrivingLicsense:5,
+	NewInternationalLicense:6,
+	RetakeTest:7 
+  }
 }
