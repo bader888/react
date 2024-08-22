@@ -26,7 +26,7 @@ const ListApplicationTypesPage = () => {
   };
   return (
     <div>
-      <Container maxWidth="md">
+      <Container maxWidth="md" className="Container">
         <div>
           <Header title={"Manage Application Types"} />
           <Button
@@ -40,7 +40,7 @@ const ListApplicationTypesPage = () => {
             Add New Application type
           </Button>
         </div>
-        <MyTable handleRowClick={HandleRowClick} tableData={data} />
+        <MyTable HandleRowClick={HandleRowClick} tableData={data} />
       </Container>
     </div>
   );

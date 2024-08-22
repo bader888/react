@@ -17,35 +17,18 @@ const ListTypePage = () => {
 
   const HandleRowClick = (ID) => {
     console.log(ID);
-    //  Navigate(`update/${ID}`)
-  };
-
-  const HandleUpdate = (ID) => {
-    Navigate(`update/${ID}`);
-  };
-
-  const HandleDelete = (ID) => {
-   Swal.fire({title:"not implemented yet"})
-  };
-
-  const HandleShowDetails = (ID) => {
-   Swal.fire({title:"not implemented yet"})
     
   };
 
+  
+ 
   return (
     <div>
-      <Container maxWidth="md">
+      <Container maxWidth="md" className="Container">
         <div>
           <Header title={"Test Types"} />
         </div>
-        <MyTable
-          handleUpdate={HandleUpdate}
-          handleRowClick={HandleRowClick}
-          handleDelete={HandleDelete}
-          handleShowDetails={HandleShowDetails}
-          tableData={data}
-        />
+        <MyTable HandleRowClick={HandleRowClick} tableData={data} />
       </Container>
     </div>
   );
