@@ -6,15 +6,21 @@ import { useNavigate, useParams } from "react-router-dom";
 import { clsUser } from "../../../Module/clsUsers";
 import Swal from "sweetalert2";
 import MyDialog from "../../../Components/myDialog/MyDialog";
+import ShowDetails from "../../../Components/Details/ShowDetails";
 
 const UserInfoPage = () => {
   const { UserID } = useParams();
   const refUserCard = useRef();
   const redirect = useNavigate();
+  const [user,userdata] = useState({});
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
     refUserCard.current.FoundUser(UserID);
+    clsUser.findUser(UserID)
+    .then((resp) => {
+   userdata(resp);
+    })
   }, [UserID]);
 
   function HandleBackAction() {
@@ -59,6 +65,7 @@ const UserInfoPage = () => {
           UpdateAction={HandleUpdateAction}
           DeleteAction={HandleDeleteAction}
         />
+        <ShowDetails title={'pla pla'} Data={user}/>
       </Container>
 
       <MyDialog

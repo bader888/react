@@ -5,7 +5,7 @@ import { Container } from "@mui/material";
 import MyMenu from "../Menu/MyMenu";
 import { useNavigate } from "react-router-dom";
 import { currentUser } from "../../Global/CurrentUser";
-import clsNavigator, {nav} from '../../Urls/Navgator'
+import clsNavigator from '../../Urls/Navgator'
 const MainHeader = () => {
   const redieric = useNavigate();
   const handleLogOut = () => {
