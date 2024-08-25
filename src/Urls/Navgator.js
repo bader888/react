@@ -36,6 +36,7 @@ export default class clsNavigator
     {
         Applications:"Applications",
         DriverLicenseServices:"DriverLicenseServices",
+        ManageLocalDriverLicenseApplications:"ManageLocalDriverLicenseApplications"
         
     }
 } 

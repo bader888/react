@@ -16,6 +16,12 @@ const Applications = () => {
   const moveToDriverLicenseServicePage = () => {
     navgator(clsNavigator.Applications.DriverLicenseServices);
   };
+
+  const handleManageLocalDriverLicense_Click = ()=> 
+  {
+  navgator(clsNavigator.Applications.ManageLocalDriverLicenseApplications)
+  }
+
   return (
     <div>
       <Header title={"Applications"} />
@@ -25,7 +31,7 @@ const Applications = () => {
           driver license services
         </Button>
 
-        <Button onClick={moveToDriverLicenseServicePage} variant="outlined">
+        <Button onClick={handleManageLocalDriverLicense_Click} variant="outlined">
           <img src={ManageLocalDriverLicenseImg} alt="" />
           manage local D.L.A
         </Button>

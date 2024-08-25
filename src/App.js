@@ -19,6 +19,7 @@ import UpdateTestTypePage from "./Pages/TestType.page/UpdateTestTypePage/UpdateT
 import clsNavigator from "./Urls/Navgator";   
 import Applications from "./Pages/Applications.page/Applications/Applications"; 
 import DriverLicenseServicesPage from "./Pages/DriverLicenseServices.Page.jsx/DriverLicenseServicesPage";
+import ManageLocalDriverLicenseApplications from "./Pages/Applications.page/ManageLocalDriverLicenseApplications.Page/ManageLocalDriverLicenseApplications";
 
 function App() {
   return (
@@ -77,6 +78,7 @@ function App() {
         <Route path={clsNavigator.Applications.Applications}>
           <Route index element={<Applications />} />
           <Route path={clsNavigator.Applications.DriverLicenseServices} element={<DriverLicenseServicesPage />} />
+          <Route path={clsNavigator.Applications.ManageLocalDriverLicenseApplications} element={<ManageLocalDriverLicenseApplications />} />
           <Route path="ApplicationDetails/:ID" element={<ApplicationInfo />} />
           <Route
             path="Create"
