@@ -65,7 +65,7 @@ const ListUsersPage = () => {
             />
           </div>
         </div>
-        <MyTable tableData={FilterUsers} HandleRowClick={handleRowClick} />
+        <MyTable tableData={FilterUsers ?? ""} HandleRowClick={handleRowClick} />
       </Container>
     </div>
   );

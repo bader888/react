@@ -12,12 +12,13 @@ import MainHeader from "./Components/MainHeader/MainHeader";
 import ListApplicationTypesPage from "./Pages/ApplicationsType.page/ListApplicationTypes.page/ListApplicationTypes.page";
 import ApplicationTypeInfoPage from "./Pages/ApplicationsType.page/ApplicationTypeInfo.page/ApplicationTypeInfo.page";
 import CreateUpdateApplicationTypePage from "./Pages/ApplicationsType.page/CreateUpdateApplicationType.page/CreateUpdateApplicationTypePage";
-import ListApplications from "./Pages/Applications.page/ListApplicationPage/ListApplications";
 import CreateUpdateApplication from "./Pages/Applications.page/CreateApplicationPage/CreateUpdateApplication";
 import ApplicationInfo from "./Pages/Applications.page/ApplicationInfoPage/ApplicationInfo";
 import ListTypePage from "./Pages/TestType.page/ListTestTypePage/ListTypePage";
 import UpdateTestTypePage from "./Pages/TestType.page/UpdateTestTypePage/UpdateTestTypePage";
-import clsNavigator from "./Urls/Navgator";  
+import clsNavigator from "./Urls/Navgator";   
+import Applications from "./Pages/Applications.page/Applications/Applications"; 
+import DriverLicenseServicesPage from "./Pages/DriverLicenseServices.Page.jsx/DriverLicenseServicesPage";
 
 function App() {
   return (
@@ -34,7 +35,7 @@ function App() {
             element={<PresonDetails />}
           />
           <Route
-            path={clsNavigator.PeopleNavgate.CreatePersonPage}
+            path={clsNavigator.PeopleNavgate.CreatePersonPage} 
             element={<CreatePerson Mode={"Create"} />}
           />
           <Route
@@ -73,8 +74,9 @@ function App() {
           element={<CreateUpdateApplicationTypePage mode={"update"} />}
         />
 
-        <Route path="/Applications">
-          <Route index element={<ListApplications />} />
+        <Route path={clsNavigator.Applications.Applications}>
+          <Route index element={<Applications />} />
+          <Route path={clsNavigator.Applications.DriverLicenseServices} element={<DriverLicenseServicesPage />} />
           <Route path="ApplicationDetails/:ID" element={<ApplicationInfo />} />
           <Route
             path="Create"

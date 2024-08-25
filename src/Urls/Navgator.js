@@ -31,4 +31,11 @@ export default class clsNavigator
             return `Details/${PersonID}`
         }
     }
+
+    static Applications =
+    {
+        Applications:"Applications",
+        DriverLicenseServices:"DriverLicenseServices",
+        
+    }
 } 

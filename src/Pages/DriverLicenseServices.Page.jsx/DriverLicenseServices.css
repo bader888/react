@@ -1,0 +1,15 @@
+.driver-license-services-container
+{
+display: flex !important;
+flex-direction: column;
+gap: 20px;  
+padding: 20px; 
+border-radius: 5px;
+box-shadow: 0px 0px 5px 0.5px rgba(216, 216, 216, 0.683);
+}
+
+.driver-license-services-container button{
+    
+    display: flex; 
+    justify-content: space-between; 
+}

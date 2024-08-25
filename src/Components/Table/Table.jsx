@@ -76,7 +76,7 @@ const MyTable = ({ tableData, HandleRowClick }) => {
         </Table>
       </TableContainer>
       <div className="countContainer">
-        <span>count: {tableData.length} </span>
+        <span>count: {tableData.length ??" "} </span>
       </div>
     </div>
   );

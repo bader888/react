@@ -15,8 +15,14 @@ const ApplicationInfo = () => {
   const Naviagator = useNavigate();
   useEffect(() => {
     async function FetchData() {
-      const response = await clsApplication.FindbyID(ID);
-      setData(response);
+      try
+      {
+        const response = await clsApplication.FindbyID(ID);
+        setData(response);
+      }catch(error)
+      {
+        console.error(error);
+      }
     }
 
     FetchData();
