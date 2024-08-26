@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 import Header from "../../../Components/header/Header";
 import MyTable from "../../../Components/Table/Table";
 import { clsLocalDriverLicenseApplications } from "../../../Module/clsLocalDriverLicenseApplications";
-import { Add, Sort, SortByAlpha } from "@mui/icons-material";
-import PeopleContextMenu from "../../../Components/ContextMenu/PeopleContextMenu";
+import { Add, SortByAlpha } from "@mui/icons-material"; 
+import LocalDriverLicenseApplicationsContextMenu from "../../../Components/ContextMenu/LocalDriverLicenseApplicationsContextMenu";
 
 const ManageLocalDriverLicenseApplications = () => {
   const [localDriverLicnseApplications, setLocalDriverLicenseApplications] =
@@ -59,7 +59,7 @@ const ManageLocalDriverLicenseApplications = () => {
         <div>
           <Header title={"manage local driver license applications"} />
           <div className="peopleActionContainer">
-            <PeopleContextMenu PersonID={LocalApplicationID} />
+            <LocalDriverLicenseApplicationsContextMenu ldaID={LocalApplicationID} />
             <Button
               color="success"
               variant="outlined"
