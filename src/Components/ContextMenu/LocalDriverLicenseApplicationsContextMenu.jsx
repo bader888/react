@@ -47,7 +47,7 @@ const LocalDriverLicenseApplicationsContextMenu = ({ ldaID }) => {
   };
 
   const handleShowApplicationDetails = () => {
-    redirect(clsNavigator.PeopleNavgate.CreatePersonPage);
+    redirect(clsNavigator.Applications.LocalDriverLicenseApplicationPageWithID(ldaID));
   };
 
   const handleDeleteApplication = () => {

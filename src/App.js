@@ -16,10 +16,12 @@ import CreateUpdateApplication from "./Pages/Applications.page/CreateApplication
 import ApplicationInfo from "./Pages/Applications.page/ApplicationInfoPage/ApplicationInfo";
 import ListTypePage from "./Pages/TestType.page/ListTestTypePage/ListTypePage";
 import UpdateTestTypePage from "./Pages/TestType.page/UpdateTestTypePage/UpdateTestTypePage";
-import clsNavigator from "./Urls/Navgator";   
-import Applications from "./Pages/Applications.page/Applications/Applications"; 
+import clsNavigator from "./Urls/Navgator";
+import Applications from "./Pages/Applications.page/Applications/Applications";
 import DriverLicenseServicesPage from "./Pages/DriverLicenseServices.Page.jsx/DriverLicenseServicesPage";
 import ManageLocalDriverLicenseApplications from "./Pages/Applications.page/ManageLocalDriverLicenseApplications.Page/ManageLocalDriverLicenseApplications";
+import { clsApplication } from "./Module/clsApplications";
+import LocalDriverLicenseApplicationPage from "./Pages/Applications.page/ManageLocalDriverLicenseApplications.Page/LocalDriverLicenseApplicationDetails/LocalDriverLicenseApplicationPage";
 
 function App() {
   return (
@@ -36,7 +38,7 @@ function App() {
             element={<PresonDetails />}
           />
           <Route
-            path={clsNavigator.PeopleNavgate.CreatePersonPage} 
+            path={clsNavigator.PeopleNavgate.CreatePersonPage}
             element={<CreatePerson Mode={"Create"} />}
           />
           <Route
@@ -77,8 +79,18 @@ function App() {
 
         <Route path={clsNavigator.Applications.Applications}>
           <Route index element={<Applications />} />
-          <Route path={clsNavigator.Applications.DriverLicenseServices} element={<DriverLicenseServicesPage />} />
+          <Route
+            path={clsNavigator.Applications.DriverLicenseServices}
+            element={<DriverLicenseServicesPage />}
+          />
+          {/* LocalDriverLicenseApplicationDetails route as a new page */}
           <Route path={clsNavigator.Applications.ManageLocalDriverLicenseApplications} element={<ManageLocalDriverLicenseApplications />} />
+          
+          <Route
+            path={`${clsNavigator.Applications.ManageLocalDriverLicenseApplications}/${clsNavigator.Applications.LocalDriverLicenseApplicationDetails}/:ID`}
+            element={<LocalDriverLicenseApplicationPage />}
+          />
+
           <Route path="ApplicationDetails/:ID" element={<ApplicationInfo />} />
           <Route
             path="Create"

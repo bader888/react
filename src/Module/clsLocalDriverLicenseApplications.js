@@ -25,6 +25,19 @@ export class clsLocalDriverLicenseApplications {
     }
   }
 
+  static async FindLocalDrivingLicenseApplication(ID)
+  {
+    try {
+      const response = await axios.get(
+        `https://localhost:7180/LocalDrivingLicenseApplication/Find/${ID}`
+      );
+
+      return response.data.Data;
+    } catch (error) {
+      console.log("error application type: " + error);
+    }
+  }
+
   static async Remove(ID) {
     try {
       const response = await axios.delete(

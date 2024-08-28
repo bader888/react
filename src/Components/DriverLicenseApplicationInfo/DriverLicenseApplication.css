@@ -1,0 +1,22 @@
+.Basic-application-info__Container {
+    padding: 2rem;
+    box-shadow: 0px 0px 0px 0.5px;
+    border-radius: 6px;
+}
+.Basic-application-info__Container p {
+    border-bottom: 1px solid;
+    padding-bottom: 10px;
+    margin: 0px;
+}
+
+.Basic-application-info__Container p img {
+position: relative;
+top: 10px;
+margin-right: 10px;
+}
+
+.Basic-application-info__Container h4
+{
+    margin: 0px 0px 5px 0px;
+    text-align: center;
+}
